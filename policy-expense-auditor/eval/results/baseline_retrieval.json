@@ -1,0 +1,2419 @@
+{
+  "timestamp": "2026-09-02T12:24:24.244Z",
+  "collection": "policies_eval_baseline",
+  "summary": {
+    "total_queries": 40,
+    "macro_recall_at_3": 0.9375,
+    "macro_precision_at_3": 0.35000000000000003,
+    "macro_mrr": 0.9375,
+    "subgroups": {
+      "easy": {
+        "count": 9,
+        "recall": 0.7777777777777778,
+        "precision": 0.2962962962962963,
+        "mrr": 0.7222222222222222
+      },
+      "medium": {
+        "count": 18,
+        "recall": 0.9722222222222222,
+        "precision": 0.33333333333333326,
+        "mrr": 1
+      },
+      "hard": {
+        "count": 13,
+        "recall": 1,
+        "precision": 0.41025641025641024,
+        "mrr": 1
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "TC-001",
+      "query": "Hailed a standard yellow cab from Chicago O'Hare terminal to the downtown hotel where the regional sales summit is being hosted.",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§1.4",
+        "§2.1",
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§2.4",
+        "§3.1"
+      ],
+      "hit_clauses": [
+        "§2.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 4,
+          "score": 0.6575772,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.6245821,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 7,
+          "score": 0.6236222,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-002",
+      "query": "Booked roundtrip basic coach airfare on Delta from Boston to Atlanta for the Q3 operations review meeting three weeks before the flight.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§1.1",
+        "§1.2",
+        "§1.3",
+        "§1.4",
+        "§4.4",
+        "§5.1",
+        "§5.2"
+      ],
+      "hit_clauses": [
+        "§1.1",
+        "§1.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.6666666666666666,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 2,
+          "score": 0.66365856,
+          "clauses": [
+            "§1.1",
+            "§1.2",
+            "§1.3"
+          ],
+          "snippet": "ted for flights under 6 hours unless an executive medical exemption is on file with People Operation..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 3,
+          "score": 0.65123385,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 13,
+          "score": 0.6461532,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-003",
+      "query": "Grabbed a quick breakfast sandwich and coffee at Starbucks during a one-day trip to our Hartford warehouse location.",
+      "category": "Meals & Business Dining",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§2.4",
+        "§3.1",
+        "§2.2",
+        "§2.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [],
+      "recall_at_3": 0,
+      "precision_at_3": 0,
+      "mrr": 0,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 7,
+          "score": 0.5880716,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 6,
+          "score": 0.5822082,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.57738143,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": false,
+      "full_pass": false
+    },
+    {
+      "id": "TC-004",
+      "query": "Purchased an ergonomic wireless split keyboard and vertical mouse for my daily remote engineering workstation.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§5.3",
+        "§6.1",
+        "§6.2",
+        "§6.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§6.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 15,
+          "score": 0.5978054,
+          "clauses": [
+            "§5.3",
+            "§6.1",
+            "§6.2"
+          ],
+          "snippet": "n fees will be rejected unless caused by an unavoidable business emergency documented in writing.  -..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 16,
+          "score": 0.54078007,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.5356715,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-005",
+      "query": "Paid for high-speed in-room Wi-Fi connection for 3 nights at the Marriott during a business visit to the Dallas client office.",
+      "category": "Hotel & Lodging",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§5.2",
+        "§5.3",
+        "§4.4",
+        "§5.1",
+        "§2.4",
+        "§3.1"
+      ],
+      "hit_clauses": [
+        "§5.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 14,
+          "score": 0.7231514,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.6955637,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 7,
+          "score": 0.65990925,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-006",
+      "query": "Parked in the airport economy long-term surface lot for 4 days while attending the annual tech conference in Las Vegas.",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§2.2",
+        "§2.3",
+        "§2.4",
+        "§3.1",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§2.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 6,
+          "score": 0.6892604,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.6694497,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6199298,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-007",
+      "query": "Submitted a receipt for a double IPA craft beer ordered at the hotel lobby bar after the client dinner concluded.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§4.1",
+        "§4.2",
+        "§4.3",
+        "§3.1",
+        "§3.2"
+      ],
+      "hit_clauses": [
+        "§4.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 0.5,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 9,
+          "score": 0.7088805,
+          "clauses": [
+            "§3.3",
+            "§3.4"
+          ],
+          "snippet": "p to a maximum of $100.00 USD per person (including host). All client entertainment claims must incl..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 11,
+          "score": 0.7032763,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 8,
+          "score": 0.70239025,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-008",
+      "query": "Reimbursing a municipal parking meter ticket received while parked outside the customer site during an afternoon meeting.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.3"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§2.4",
+        "§3.1",
+        "§1.4",
+        "§2.1",
+        "§2.2",
+        "§2.3"
+      ],
+      "hit_clauses": [],
+      "recall_at_3": 0,
+      "precision_at_3": 0,
+      "mrr": 0,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 7,
+          "score": 0.7122463,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 4,
+          "score": 0.6889082,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 6,
+          "score": 0.67509735,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        }
+      ],
+      "passed": false,
+      "full_pass": false
+    },
+    {
+      "id": "TC-009",
+      "query": "Purchased an in-flight movie and watched pay-per-view films in the hotel room after work hours.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§4.1",
+        "§4.2",
+        "§4.3",
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§4.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 11,
+          "score": 0.66435194,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.6215964,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6171308,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-010",
+      "query": "Booked an urgent one-way plane ticket 4 days before traveling to fix a critical production outage at our Phoenix data center.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.2"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§1.1",
+        "§1.2",
+        "§1.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§1.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 2,
+          "score": 0.6346407,
+          "clauses": [
+            "§1.1",
+            "§1.2",
+            "§1.3"
+          ],
+          "snippet": "ted for flights under 6 hours unless an executive medical exemption is on file with People Operation..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 4,
+          "score": 0.6343916,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 3,
+          "score": 0.62751985,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-011",
+      "query": "Reserved an Uber Black premium sedan from the airport to the hotel because regular rides had long queues.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§1.4",
+        "§2.1",
+        "§2.2",
+        "§2.3",
+        "§2.4",
+        "§4.4",
+        "§5.1",
+        "§5.2"
+      ],
+      "hit_clauses": [
+        "§2.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 4,
+          "score": 0.6413233,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 6,
+          "score": 0.6258404,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 13,
+          "score": 0.5963243,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-012",
+      "query": "Drove my personal Honda Civic 180 miles roundtrip to deliver backup hardware to a customer branch site.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§2.1",
+        "§2.2",
+        "§2.3",
+        "§1.4",
+        "§2.4"
+      ],
+      "hit_clauses": [
+        "§2.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 5,
+          "score": 0.6661724,
+          "clauses": [
+            "§2.1",
+            "§2.2",
+            "§2.3"
+          ],
+          "snippet": "uire a business reason detailing distance or surge pricing. Luxury rideshare tiers (Uber Black, Lyft..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 4,
+          "score": 0.64983475,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 6,
+          "score": 0.6394067,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-013",
+      "query": "Claimed 25 miles per day for my daily drive between my home in Jersey City and the company HQ office in Manhattan.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§2.1",
+        "§2.2",
+        "§2.3",
+        "§2.4",
+        "§3.1"
+      ],
+      "hit_clauses": [
+        "§2.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 5,
+          "score": 0.6748259,
+          "clauses": [
+            "§2.1",
+            "§2.2",
+            "§2.3"
+          ],
+          "snippet": "uire a business reason detailing distance or surge pricing. Luxury rideshare tiers (Uber Black, Lyft..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.64975,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 6,
+          "score": 0.64777905,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-014",
+      "query": "Stayed 2 nights at the Hyatt Regency in downtown San Francisco at a nightly room rate of $240 before taxes for a partner summit.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§2.4",
+        "§3.1",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§5.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 13,
+          "score": 0.6684075,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.645209,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.63449144,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-015",
+      "query": "Booked a standard hotel room in Cleveland for 2 nights at $235 per night due to an ongoing medical convention.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§1.4",
+        "§2.1",
+        "§5.3"
+      ],
+      "hit_clauses": [
+        "§5.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 13,
+          "score": 0.6585332,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 4,
+          "score": 0.6387257,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 14,
+          "score": 0.62830013,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-016",
+      "query": "Hosted a business dinner for 4 people (myself + 3 Acme Corp client stakeholders); total meal was $360 including tax and 18% tip.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§3.1",
+        "§3.2",
+        "§2.4"
+      ],
+      "hit_clauses": [
+        "§3.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 9,
+          "score": 0.74775064,
+          "clauses": [
+            "§3.3",
+            "§3.4"
+          ],
+          "snippet": "p to a maximum of $100.00 USD per person (including host). All client entertainment claims must incl..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 8,
+          "score": 0.7238555,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 7,
+          "score": 0.6994486,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-017",
+      "query": "Dinner with 2 prospective partners to review vendor RFP responses; invoice came to $340 for the 3 of us.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§3.1",
+        "§3.2",
+        "§3.3",
+        "§3.4",
+        "§2.4"
+      ],
+      "hit_clauses": [
+        "§3.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 8,
+          "score": 0.7406659,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 9,
+          "score": 0.7327038,
+          "clauses": [
+            "§3.3",
+            "§3.4"
+          ],
+          "snippet": "p to a maximum of $100.00 USD per person (including host). All client entertainment claims must incl..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 7,
+          "score": 0.72233593,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-018",
+      "query": "Full day meals during overnight travel in Denver: Breakfast ($18), Lunch ($24), and Dinner ($45), totaling $87.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§3.1",
+        "§3.2",
+        "§3.3",
+        "§2.4",
+        "§4.4",
+        "§5.1",
+        "§5.2"
+      ],
+      "hit_clauses": [
+        "§3.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 8,
+          "score": 0.703704,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.6978279,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 13,
+          "score": 0.63923734,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-019",
+      "query": "Combined food total for a single day of travel came to $125 across room service and lunch.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§3.1",
+        "§3.2",
+        "§3.3",
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§2.4"
+      ],
+      "hit_clauses": [
+        "§3.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 8,
+          "score": 0.71505,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.700742,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 7,
+          "score": 0.6995121,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-020",
+      "query": "Paid for the rental car company's prepaid full tank of gas option and supplementary liability insurance at counter check-in.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§2.2",
+        "§2.3",
+        "§2.4",
+        "§3.1",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§2.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 6,
+          "score": 0.66477704,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.62613463,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.61128855,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-021",
+      "query": "Hotel dry cleaning and laundry service bill incurred on the 6th day of an 8-day multi-city training roadshow.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§5.2",
+        "§5.3",
+        "§4.4",
+        "§5.1",
+        "§4.1",
+        "§4.2",
+        "§4.3"
+      ],
+      "hit_clauses": [
+        "§5.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 14,
+          "score": 0.75557005,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.72586346,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 11,
+          "score": 0.69201547,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-022",
+      "query": "Submitted a 2-day business trip hotel laundry invoice for shirt pressing before an executive breakfast.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§5.2",
+        "§5.3",
+        "§4.1",
+        "§4.2",
+        "§4.3",
+        "§4.4",
+        "§5.1"
+      ],
+      "hit_clauses": [
+        "§5.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 14,
+          "score": 0.7204211,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 11,
+          "score": 0.68125963,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 13,
+          "score": 0.67448723,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-023",
+      "query": "Monthly subscription for GitHub Copilot Pro and JetBrains IDE tools utilized for daily software development tasks.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§6.1",
+        "§6.2",
+        "§6.3",
+        "§5.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§6.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 16,
+          "score": 0.6615964,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 15,
+          "score": 0.62386245,
+          "clauses": [
+            "§5.3",
+            "§6.1",
+            "§6.2"
+          ],
+          "snippet": "n fees will be rejected unless caused by an unavoidable business emergency documented in writing.  -..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.5957114,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-024",
+      "query": "Monthly enterprise workspace AI assistant subscription claimed without submitting IT security approval ticket.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§6.1",
+        "§6.2",
+        "§6.3",
+        "§5.3",
+        "§4.1",
+        "§4.2",
+        "§4.3"
+      ],
+      "hit_clauses": [
+        "§6.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 16,
+          "score": 0.6776482,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 15,
+          "score": 0.617681,
+          "clauses": [
+            "§5.3",
+            "§6.1",
+            "§6.2"
+          ],
+          "snippet": "n fees will be rejected unless caused by an unavoidable business emergency documented in writing.  -..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 11,
+          "score": 0.59229547,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-025",
+      "query": "Overnight expedited courier delivery of signed commercial contracts to counterparty counsel before the fiscal deadline.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§6.3",
+        "§6.1",
+        "§6.2",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§6.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 17,
+          "score": 0.6852117,
+          "clauses": [
+            "§6.3"
+          ],
+          "snippet": "urier shipping exceeding $40.00 requires written justification stating the business urgency. ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 16,
+          "score": 0.5985142,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.55482954,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-026",
+      "query": "Upgraded domestic flight from Seattle to San Francisco to First Class out of personal pocket and submitted full ticket.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§1.4",
+        "§2.1",
+        "§1.3",
+        "§4.1",
+        "§4.2",
+        "§4.3"
+      ],
+      "hit_clauses": [
+        "§1.4"
+      ],
+      "recall_at_3": 0.5,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 4,
+          "score": 0.6889769,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 3,
+          "score": 0.68580955,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 11,
+          "score": 0.67234325,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        }
+      ],
+      "passed": true,
+      "full_pass": false
+    },
+    {
+      "id": "TC-027",
+      "query": "Missed the hotel cancellation deadline by 2 hours due to a delayed client meeting, incurring a one-night room penalty charge.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.3"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§5.2",
+        "§5.3",
+        "§4.4",
+        "§5.1",
+        "§4.3"
+      ],
+      "hit_clauses": [
+        "§5.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 14,
+          "score": 0.6978239,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.63744056,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 12,
+          "score": 0.62925076,
+          "clauses": [
+            "§4.3",
+            "§4.4",
+            "§5.1"
+          ],
+          "snippet": "arking fines, toll violations, or vehicle towing fees incurred during business travel are the sole l..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-028",
+      "query": "Team celebratory dinner with 5 colleagues after product launch; we split the $500 total check onto two employee cards ($250 each).",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.4"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§4.1",
+        "§3.1",
+        "§3.2"
+      ],
+      "hit_clauses": [
+        "§3.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 9,
+          "score": 0.7355521,
+          "clauses": [
+            "§3.3",
+            "§3.4"
+          ],
+          "snippet": "p to a maximum of $100.00 USD per person (including host). All client entertainment claims must incl..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 10,
+          "score": 0.69989246,
+          "clauses": [
+            "§3.4",
+            "§4.1"
+          ],
+          "snippet": " bill across multiple employee expense claims to circumvent individual limits is strictly prohibited..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 8,
+          "score": 0.6996881,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-029",
+      "query": "Hosted 2 VP clients for dinner ($180 total food), but the receipt includes an itemized $65 Cabernet Sauvignon wine bottle.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.3",
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§3.1",
+        "§3.2",
+        "§4.1"
+      ],
+      "hit_clauses": [
+        "§3.3",
+        "§4.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.6666666666666666,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 9,
+          "score": 0.71488124,
+          "clauses": [
+            "§3.3",
+            "§3.4"
+          ],
+          "snippet": "p to a maximum of $100.00 USD per person (including host). All client entertainment claims must incl..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 8,
+          "score": 0.6728474,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 10,
+          "score": 0.66867924,
+          "clauses": [
+            "§3.4",
+            "§4.1"
+          ],
+          "snippet": " bill across multiple employee expense claims to circumvent individual limits is strictly prohibited..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-030",
+      "query": "Took a 45-mile Uber from Dulles Airport during an intense snowstorm; surge pricing pushed the fare to $84.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§1.4",
+        "§2.1",
+        "§2.4",
+        "§3.1",
+        "§2.2",
+        "§2.3"
+      ],
+      "hit_clauses": [
+        "§2.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 4,
+          "score": 0.63193595,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.60005206,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 5,
+          "score": 0.5997096,
+          "clauses": [
+            "§2.1",
+            "§2.2",
+            "§2.3"
+          ],
+          "snippet": "uire a business reason detailing distance or surge pricing. Luxury rideshare tiers (Uber Black, Lyft..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-031",
+      "query": "Booked flight from London to New York 8 weeks in advance in standard economy, but did not request VP approval beforehand.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.3"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§1.3",
+        "§1.4",
+        "§1.1",
+        "§1.2",
+        "§2.2",
+        "§2.3",
+        "§2.4"
+      ],
+      "hit_clauses": [
+        "§1.1",
+        "§1.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.6666666666666666,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 3,
+          "score": 0.68599725,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 2,
+          "score": 0.6667607,
+          "clauses": [
+            "§1.1",
+            "§1.2",
+            "§1.3"
+          ],
+          "snippet": "ted for flights under 6 hours unless an executive medical exemption is on file with People Operation..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 6,
+          "score": 0.63031596,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-032",
+      "query": "Paid an $85 Economy Plus extra-legroom upgrade fee on a 5-hour domestic flight to ensure workspace for drafting an urgent client RFP.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§1.3",
+        "§1.4",
+        "§2.1",
+        "§5.3",
+        "§6.1",
+        "§6.2"
+      ],
+      "hit_clauses": [
+        "§1.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 3,
+          "score": 0.6946076,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 4,
+          "score": 0.6869564,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 15,
+          "score": 0.6674031,
+          "clauses": [
+            "§5.3",
+            "§6.1",
+            "§6.2"
+          ],
+          "snippet": "n fees will be rejected unless caused by an unavoidable business emergency documented in writing.  -..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-033",
+      "query": "Spouse accompanied me on a 4-day executive conference in Miami; submitted additional meal and hotel supplement charges.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.4"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§4.3",
+        "§4.4",
+        "§5.1",
+        "§4.1",
+        "§4.2",
+        "§5.2"
+      ],
+      "hit_clauses": [
+        "§4.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 12,
+          "score": 0.73447585,
+          "clauses": [
+            "§4.3",
+            "§4.4",
+            "§5.1"
+          ],
+          "snippet": "arking fines, toll violations, or vehicle towing fees incurred during business travel are the sole l..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 11,
+          "score": 0.6940117,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 13,
+          "score": 0.6759907,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-034",
+      "query": "Rented a Premium Full-Size SUV in Denver because mountain road weather required 4-wheel drive to reach the client facility.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§2.2",
+        "§2.3",
+        "§2.4",
+        "§2.1",
+        "§1.4"
+      ],
+      "hit_clauses": [
+        "§2.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 6,
+          "score": 0.6589626,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 5,
+          "score": 0.62994325,
+          "clauses": [
+            "§2.1",
+            "§2.2",
+            "§2.3"
+          ],
+          "snippet": "uire a business reason detailing distance or surge pricing. Luxury rideshare tiers (Uber Black, Lyft..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.62501585,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-035",
+      "query": "Purchased a 4K external display ($170) and a standing desk riser ($110) for remote work, totaling $280 for the year.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§5.3",
+        "§6.1",
+        "§6.2",
+        "§6.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§6.1"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 15,
+          "score": 0.70263106,
+          "clauses": [
+            "§5.3",
+            "§6.1",
+            "§6.2"
+          ],
+          "snippet": "n fees will be rejected unless caused by an unavoidable business emergency documented in writing.  -..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 16,
+          "score": 0.66556764,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6477184,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-036",
+      "query": "Paid a $50 extra legroom seat selection charge on a 4-hour flight due to a recent knee injury (medical note attached).",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§1.3",
+        "§1.4",
+        "§1.1",
+        "§1.2",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§1.1",
+        "§1.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.6666666666666666,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 3,
+          "score": 0.6737892,
+          "clauses": [
+            "§1.3",
+            "§1.4"
+          ],
+          "snippet": "nal Travel Authorization All international travel requires prior written authorization from the Depa..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 2,
+          "score": 0.63445586,
+          "clauses": [
+            "§1.1",
+            "§1.2",
+            "§1.3"
+          ],
+          "snippet": "ted for flights under 6 hours unless an executive medical exemption is on file with People Operation..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6148057,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-037",
+      "query": "Used airport terminal valet parking for 3 days ($105 total) because all long-term economy surface lots were at 100% capacity upon arrival.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§2.4",
+        "§3.1",
+        "§2.2",
+        "§2.3",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§2.4"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 7,
+          "score": 0.6917558,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 6,
+          "score": 0.6726301,
+          "clauses": [
+            "§2.2",
+            "§2.3",
+            "§2.4"
+          ],
+          "snippet": "mstance.  ### §2.3 Rental Car Class & Fuel Policy When rental cars are required, reservations must b..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6177536,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-038",
+      "query": "Ordered mini-bar water bottles, chocolate, and energy drinks from the hotel room during late-night proposal preparation.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "retrieved_clauses": [
+        "§4.1",
+        "§4.2",
+        "§4.3",
+        "§4.4",
+        "§5.1",
+        "§5.2",
+        "§5.3"
+      ],
+      "hit_clauses": [
+        "§4.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 11,
+          "score": 0.636933,
+          "clauses": [
+            "§4.1",
+            "§4.2",
+            "§4.3"
+          ],
+          "snippet": "ust be deducted before submission; if submitted in full, the entire line item or claim will be rejec..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 13,
+          "score": 0.619064,
+          "clauses": [
+            "§4.4",
+            "§5.1",
+            "§5.2"
+          ],
+          "snippet": "ds  ### §5.1 Standard Room Rate Cap Hotel accommodations must be booked in standard single-occupancy..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 14,
+          "score": 0.60949594,
+          "clauses": [
+            "§5.2",
+            "§5.3"
+          ],
+          "snippet": "§5.2 Hotel Incidentals, Internet & Laundry High-speed in-room internet access is reimbursable up to ..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-039",
+      "query": "Dinner for single traveler during transit in Frankfurt; bill converted to $48 USD for a schnitzel and soft beverage.",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "flagged",
+      "retrieved_clauses": [
+        "§3.1",
+        "§3.2",
+        "§3.3",
+        "§2.4",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§3.2"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 8,
+          "score": 0.63827276,
+          "clauses": [
+            "§3.1",
+            "§3.2",
+            "§3.3"
+          ],
+          "snippet": "portion exceeding 1.5x ($112.50) will be rejected.  ### §3.2 Single Meal Individual Limits Individua..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 7,
+          "score": 0.62461007,
+          "clauses": [
+            "§2.4",
+            "§3.1"
+          ],
+          "snippet": "parking lots up to a maximum daily cap of $30.00 per day. Valet parking and premium short-term termi..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6092143,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    },
+    {
+      "id": "TC-040",
+      "query": "Overnighted critical legal deposition documents to federal court via courier, costing $65 with urgent courier receipt attached.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "retrieved_clauses": [
+        "§6.3",
+        "§6.1",
+        "§6.2",
+        "§1.4",
+        "§2.1"
+      ],
+      "hit_clauses": [
+        "§6.3"
+      ],
+      "recall_at_3": 1,
+      "precision_at_3": 0.3333333333333333,
+      "mrr": 1,
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunkId": 17,
+          "score": 0.71710795,
+          "clauses": [
+            "§6.3"
+          ],
+          "snippet": "urier shipping exceeding $40.00 requires written justification stating the business urgency. ..."
+        },
+        {
+          "rank": 2,
+          "chunkId": 16,
+          "score": 0.62945443,
+          "clauses": [
+            "§6.1",
+            "§6.2",
+            "§6.3"
+          ],
+          "snippet": "o purchasing.  ### §6.2 Software Subscriptions & SaaS Tools Software subscriptions, cloud services, ..."
+        },
+        {
+          "rank": 3,
+          "chunkId": 4,
+          "score": 0.6023465,
+          "clauses": [
+            "§1.4",
+            "§2.1"
+          ],
+          "snippet": "s, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.  --..."
+        }
+      ],
+      "passed": true,
+      "full_pass": true
+    }
+  ]
+}
