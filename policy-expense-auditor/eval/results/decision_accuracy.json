@@ -1,0 +1,867 @@
+{
+  "timestamp": "2026-09-02T17:08:25.241Z",
+  "summary": {
+    "total_audits": 40,
+    "overall_accuracy": 0.725,
+    "confusion_matrix": {
+      "approved": {
+        "approved": 11,
+        "flagged": 0,
+        "rejected": 2
+      },
+      "flagged": {
+        "approved": 2,
+        "flagged": 3,
+        "rejected": 7
+      },
+      "rejected": {
+        "approved": 0,
+        "flagged": 0,
+        "rejected": 15
+      }
+    },
+    "class_metrics": {
+      "approved": {
+        "support": 13,
+        "true_positives": 11,
+        "false_positives": 2,
+        "false_negatives": 2,
+        "precision": 0.8461538461538461,
+        "recall": 0.8461538461538461,
+        "f1_score": 0.8461538461538461
+      },
+      "flagged": {
+        "support": 12,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 9,
+        "precision": 1,
+        "recall": 0.25,
+        "f1_score": 0.4
+      },
+      "rejected": {
+        "support": 15,
+        "true_positives": 15,
+        "false_positives": 9,
+        "false_negatives": 0,
+        "precision": 0.625,
+        "recall": 1,
+        "f1_score": 0.7692307692307693
+      }
+    },
+    "compliance_risk_analysis": {
+      "total_violations": 15,
+      "rejected_class_recall": 1,
+      "false_approvals_count": 0,
+      "compliance_leakage_rate": 0,
+      "interpretation": "Zero False Approvals: All prohibited expense violations were successfully intercepted."
+    }
+  },
+  "evaluations": [
+    {
+      "id": "TC-001",
+      "query": "Hailed a standard yellow cab from Chicago O'Hare terminal to the downtown hotel where the regional sales summit is being hosted.",
+      "category": "Ground Transportation",
+      "claimed_amount": 38.5,
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The taxi claim strictly adheres to the policy rules as it is a standard one-way trip under the maximum limit of $50.00 as outlined in Clause §2.1.",
+      "policy_excerpt": "Taxis, rideshares (Uber, Lyft standard / comfort), and public transit incurred directly for business travel between airports, lodging, and client/work sites are reimbursable up to a maximum of $50.00 per single one-way trip.",
+      "retrieved_clauses": [
+        "§2.1",
+        "§5.1",
+        "§2.3"
+      ]
+    },
+    {
+      "id": "TC-002",
+      "query": "Booked roundtrip basic coach airfare on Delta from Boston to Atlanta for the Q3 operations review meeting three weeks before the flight.",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 320,
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The flight was booked three weeks in advance which complies with the 14-day advance booking requirement and standard economy class policy under Clause §1.2 and §1.1.",
+      "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares.",
+      "retrieved_clauses": [
+        "§1.2",
+        "§1.1",
+        "§1.4"
+      ]
+    },
+    {
+      "id": "TC-003",
+      "query": "Grabbed a quick breakfast sandwich and coffee at Starbucks during a one-day trip to our Hartford warehouse location.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 13.25,
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The individual meal expense of $13.25 for breakfast is within the $15.00 limit outlined in Clause §3.2.",
+      "policy_excerpt": "Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00). Individual meal expenses within these thresholds are approved automatically.",
+      "retrieved_clauses": [
+        "§3.2",
+        "§5.1",
+        "§6.3"
+      ]
+    },
+    {
+      "id": "TC-004",
+      "query": "Purchased an ergonomic wireless split keyboard and vertical mouse for my daily remote engineering workstation.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 145,
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The claim is rejected because all hardware purchases require prior written approval from the direct manager prior to purchasing according to Clause §6.1.",
+      "policy_excerpt": "All hardware purchases require prior written approval from the direct manager prior to purchasing.",
+      "retrieved_clauses": [
+        "§6.1",
+        "§5.3",
+        "§6.2"
+      ]
+    },
+    {
+      "id": "TC-005",
+      "query": "Paid for high-speed in-room Wi-Fi connection for 3 nights at the Marriott during a business visit to the Dallas client office.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 45,
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim adheres to policy §5.2 as high-speed in-room internet is reimbursable up to $15.00/day ($45 total for 3 days).",
+      "policy_excerpt": "High-speed in-room internet access is reimbursable up to $15.00/day if not provided complimentary by the hotel.",
+      "retrieved_clauses": [
+        "§5.2",
+        "§4.2",
+        "§5.1"
+      ]
+    },
+    {
+      "id": "TC-006",
+      "query": "Parked in the airport economy long-term surface lot for 4 days while attending the annual tech conference in Las Vegas.",
+      "category": "Ground Transportation",
+      "claimed_amount": 100,
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim adheres to policy as the airport parking was in the economy long-term lot at $25 per day, which is under the $30.00 daily cap outlined in Clause §2.4.",
+      "policy_excerpt": "Airport parking is reimbursable only for economy / long-term parking lots up to a maximum daily cap of $30.00 per day.",
+      "retrieved_clauses": [
+        "§2.4",
+        "§2.3",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-007",
+      "query": "Submitted a receipt for a double IPA craft beer ordered at the hotel lobby bar after the client dinner concluded.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 14,
+      "expected_clause_ids": [
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim contains an explicit charge for beer, which violates the strict alcohol prohibition outlined in Clause §4.1.",
+      "policy_excerpt": "The company maintains a strict zero-tolerance policy regarding alcohol reimbursement. Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
+      "retrieved_clauses": [
+        "§4.1",
+        "§3.3",
+        "§4.2"
+      ]
+    },
+    {
+      "id": "TC-008",
+      "query": "Reimbursing a municipal parking meter ticket received while parked outside the customer site during an afternoon meeting.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 65,
+      "expected_clause_ids": [
+        "§4.3"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Parking tickets and fines incurred during business travel are the sole responsibility of the employee under Clause §4.3.",
+      "policy_excerpt": "Any moving violations, speeding tickets, parking fines, toll violations, or vehicle towing fees incurred during business travel are the sole legal and financial responsibility of the employee and will be rejected with zero exceptions.",
+      "retrieved_clauses": [
+        "§4.3",
+        "§2.4",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-009",
+      "query": "Purchased an in-flight movie and watched pay-per-view films in the hotel room after work hours.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 28,
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim is rejected because hotel pay-per-view movies and in-flight entertainment fees are strictly non-reimbursable personal expenses under Clause §4.2.",
+      "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
+      "retrieved_clauses": [
+        "§4.2",
+        "§5.2",
+        "§1.4"
+      ]
+    },
+    {
+      "id": "TC-010",
+      "query": "Booked an urgent one-way plane ticket 4 days before traveling to fix a critical production outage at our Phoenix data center.",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 480,
+      "expected_clause_ids": [
+        "§1.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 95,
+      "reason": "The flight was booked within 14 days of departure without attached Director-level approval, violating Clause §1.2.",
+      "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares. Flights booked within 14 days of departure require written Director-level approval attached to the claim; otherwise, the claim will be flagged for review.",
+      "retrieved_clauses": [
+        "§1.2",
+        "§1.1",
+        "§1.3"
+      ]
+    },
+    {
+      "id": "TC-011",
+      "query": "Reserved an Uber Black premium sedan from the airport to the hotel because regular rides had long queues.",
+      "category": "Ground Transportation",
+      "claimed_amount": 78,
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim is rejected because luxury rideshare tiers like Uber Black are strictly non-reimbursable under Clause §2.1.",
+      "policy_excerpt": "Luxury rideshare tiers (Uber Black, Lyft Lux) are strictly non-reimbursable.",
+      "retrieved_clauses": [
+        "§2.1",
+        "§2.3",
+        "§1.4"
+      ]
+    },
+    {
+      "id": "TC-012",
+      "query": "Drove my personal Honda Civic 180 miles roundtrip to deliver backup hardware to a customer branch site.",
+      "category": "Ground Transportation",
+      "claimed_amount": 120.6,
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim adheres to corporate policy §2.2 as personal vehicle mileage for approved business travel is reimbursable at the standard rate of $0.67 per mile.",
+      "policy_excerpt": "Employees using personal vehicles for approved business travel may claim mileage at the standard corporate rate of $0.67 per mile.",
+      "retrieved_clauses": [
+        "§2.2",
+        "§2.1",
+        "§2.3"
+      ]
+    },
+    {
+      "id": "TC-013",
+      "query": "Claimed 25 miles per day for my daily drive between my home in Jersey City and the company HQ office in Manhattan.",
+      "category": "Ground Transportation",
+      "claimed_amount": 167.5,
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Daily commuting between an employee's residence and their designated primary office is not eligible for reimbursement under Clause §2.2.",
+      "policy_excerpt": "Daily commuting between an employee's residence and their designated primary office is not eligible for reimbursement under any circumstance.",
+      "retrieved_clauses": [
+        "§2.2",
+        "§2.1",
+        "§3.1"
+      ]
+    },
+    {
+      "id": "TC-014",
+      "query": "Stayed 2 nights at the Hyatt Regency in downtown San Francisco at a nightly room rate of $240 before taxes for a partner summit.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 480,
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The nightly room rate of $240.00 in San Francisco is within the Tier 1 metropolitan city cap of $250.00 per night as outlined in Clause §5.1.",
+      "policy_excerpt": "Nightly room rates are capped at $250.00/night (before local taxes) in designated Tier 1 metropolitan cities (NYC, SF, London, Tokyo, Zurich) and $180.00/night in all other locations.",
+      "retrieved_clauses": [
+        "§5.1",
+        "§2.1",
+        "§2.4"
+      ]
+    },
+    {
+      "id": "TC-015",
+      "query": "Booked a standard hotel room in Cleveland for 2 nights at $235 per night due to an ongoing medical convention.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 470,
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The nightly room rate of $235.00 in Cleveland exceeds the non-Tier 1 cap of $180.00 by more than 20% without prior approval under Clause §5.1.",
+      "policy_excerpt": "Nightly room rates are capped at $250.00/night (before local taxes) in designated Tier 1 metropolitan cities (NYC, SF, London, Tokyo, Zurich) and $180.00/night in all other locations. Rates exceeding these caps by up to 20% due to peak city events will be flagged for review; rates exceeding 20% without prior approval will be rejected.",
+      "retrieved_clauses": [
+        "§5.1",
+        "§5.2",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-016",
+      "query": "Hosted a business dinner for 4 people (myself + 3 Acme Corp client stakeholders); total meal was $360 including tax and 18% tip.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 360,
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The claim of $360 for 4 people averages $90 per person, which complies with Clause §3.3, but the total daily meal per diem cap of $75.00 under Clause §3.1 is exceeded by more than 1.5x ($112.50), mandating rejection.",
+      "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§3.1"
+      ]
+    },
+    {
+      "id": "TC-017",
+      "query": "Dinner with 2 prospective partners to review vendor RFP responses; invoice came to $340 for the 3 of us.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 340,
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The claim of $340 for 3 people ($113.33 per person) exceeds the $100.00 USD per person meal limit under Clause §3.3.",
+      "policy_excerpt": "Meals hosted with external clients, partners, or prospective accounts are reimbursable up to a maximum of $100.00 USD per person (including host).",
+      "retrieved_clauses": [
+        "§3.3",
+        "§3.4",
+        "§3.1"
+      ]
+    },
+    {
+      "id": "TC-018",
+      "query": "Full day meals during overnight travel in Denver: Breakfast ($18), Lunch ($24), and Dinner ($45), totaling $87.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 87,
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The daily meal total of $87.00 exceeds the $75.00 daily cap but is within 1.5x of the limit under Clause §3.1.",
+      "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+      "retrieved_clauses": [
+        "§3.2",
+        "§3.1",
+        "§2.4"
+      ]
+    },
+    {
+      "id": "TC-019",
+      "query": "Combined food total for a single day of travel came to $125 across room service and lunch.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 125,
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The daily meal expense of $125.00 exceeds 1.5x the $75.00 daily per diem cap, violating Clause §3.1.",
+      "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+      "retrieved_clauses": [
+        "§3.1",
+        "§3.2",
+        "§5.2"
+      ]
+    },
+    {
+      "id": "TC-020",
+      "query": "Paid for the rental car company's prepaid full tank of gas option and supplementary liability insurance at counter check-in.",
+      "category": "Ground Transportation",
+      "claimed_amount": 95,
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim includes prepaid fuel and optional rental insurance which are strictly non-reimbursable per Clause §2.3.",
+      "policy_excerpt": "Prepaid fuel options and optional rental insurance (covered by corporate credit card policy) will be rejected.",
+      "retrieved_clauses": [
+        "§2.3",
+        "§1.4",
+        "§2.4"
+      ]
+    },
+    {
+      "id": "TC-021",
+      "query": "Hotel dry cleaning and laundry service bill incurred on the 6th day of an 8-day multi-city training roadshow.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 42,
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim is approved because laundry and dry cleaning services are reimbursable for business trips lasting five consecutive business days or longer under Clause §5.2.",
+      "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
+      "retrieved_clauses": [
+        "§5.2",
+        "§5.1",
+        "§4.2"
+      ]
+    },
+    {
+      "id": "TC-022",
+      "query": "Submitted a 2-day business trip hotel laundry invoice for shirt pressing before an executive breakfast.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 35,
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Laundry and dry cleaning services are reimbursable only for business trips lasting five consecutive business days or longer per Clause §5.2.",
+      "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
+      "retrieved_clauses": [
+        "§5.2",
+        "§3.3",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-023",
+      "query": "Monthly subscription for GitHub Copilot Pro and JetBrains IDE tools utilized for daily software development tasks.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 39,
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The software subscription amount of $39.00 USD is within the $50.00/month cap specified in Clause §6.2.",
+      "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool.",
+      "retrieved_clauses": [
+        "§6.2",
+        "§6.1",
+        "§5.3"
+      ]
+    },
+    {
+      "id": "TC-024",
+      "query": "Monthly enterprise workspace AI assistant subscription claimed without submitting IT security approval ticket.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 80,
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 95,
+      "reason": "The software subscription amount of $80.00/month exceeds the $50.00/month cap and was claimed without IT approval, resulting in a flag per clause §6.2.",
+      "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool. Unapproved software charges will be flagged.",
+      "retrieved_clauses": [
+        "§6.2",
+        "§5.3",
+        "§6.1"
+      ]
+    },
+    {
+      "id": "TC-025",
+      "query": "Overnight expedited courier delivery of signed commercial contracts to counterparty counsel before the fiscal deadline.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 32,
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The expedited courier shipping fee is under the $40.00 threshold and therefore fully reimbursable under Clause §6.3.",
+      "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
+      "retrieved_clauses": [
+        "§6.3",
+        "§1.3",
+        "§1.2"
+      ]
+    },
+    {
+      "id": "TC-026",
+      "query": "Upgraded domestic flight from Seattle to San Francisco to First Class out of personal pocket and submitted full ticket.",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 620,
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Business Class or Premium Economy travel is strictly prohibited for flights under 6 hours per Clause §1.1.",
+      "policy_excerpt": "All domestic and short-haul international flights (under 6 hours in duration) must be booked in standard Economy / Coach class. Business Class or Premium Economy travel is strictly prohibited for flights under 6 hours unless an executive medical exemption is on file with People Operations.",
+      "retrieved_clauses": [
+        "§1.4",
+        "§1.1",
+        "§4.2"
+      ]
+    },
+    {
+      "id": "TC-027",
+      "query": "Missed the hotel cancellation deadline by 2 hours due to a delayed client meeting, incurring a one-night room penalty charge.",
+      "category": "Hotel & Lodging",
+      "claimed_amount": 210,
+      "expected_clause_ids": [
+        "§5.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 95,
+      "reason": "Hotel cancellation penalties will be rejected unless caused by an unavoidable business emergency documented in writing per Clause §5.3.",
+      "policy_excerpt": "No-show penalties and late cancellation fees will be rejected unless caused by an unavoidable business emergency documented in writing.",
+      "retrieved_clauses": [
+        "§5.3",
+        "§5.1",
+        "§5.2"
+      ]
+    },
+    {
+      "id": "TC-028",
+      "query": "Team celebratory dinner with 5 colleagues after product launch; we split the $500 total check onto two employee cards ($250 each).",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 250,
+      "expected_clause_ids": [
+        "§3.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Splitting a single group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited under Clause §3.4.",
+      "policy_excerpt": "Splitting a single group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited.",
+      "retrieved_clauses": [
+        "§3.4",
+        "§3.3",
+        "§3.1"
+      ]
+    },
+    {
+      "id": "TC-029",
+      "query": "Hosted 2 VP clients for dinner ($180 total food), but the receipt includes an itemized $65 Cabernet Sauvignon wine bottle.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 245,
+      "expected_clause_ids": [
+        "§3.3",
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim was rejected because it contains charges for an alcoholic beverage, violating Clause §4.1 Strict Alcohol Prohibition (Zero Tolerance).",
+      "policy_excerpt": "Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
+      "retrieved_clauses": [
+        "§3.4",
+        "§3.3",
+        "§4.1"
+      ]
+    },
+    {
+      "id": "TC-030",
+      "query": "Took a 45-mile Uber from Dulles Airport during an intense snowstorm; surge pricing pushed the fare to $84.",
+      "category": "Ground Transportation",
+      "claimed_amount": 84,
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "approved",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The rideshare trip exceeded $50.00 but included a valid business reason detailing surge pricing due to a snowstorm, which complies with Clause §2.1.",
+      "policy_excerpt": "Rideshare trips exceeding $50.00 require a business reason detailing distance or surge pricing.",
+      "retrieved_clauses": [
+        "§2.1",
+        "§2.4",
+        "§1.4"
+      ]
+    },
+    {
+      "id": "TC-031",
+      "query": "Booked flight from London to New York 8 weeks in advance in standard economy, but did not request VP approval beforehand.",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 710,
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "approved",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The flight was booked 8 weeks in advance satisfying Clause 1.2 and in standard economy satisfying Clause 1.1.",
+      "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares.",
+      "retrieved_clauses": [
+        "§1.2",
+        "§1.1",
+        "§5.1"
+      ]
+    },
+    {
+      "id": "TC-032",
+      "query": "Paid an $85 Economy Plus extra-legroom upgrade fee on a 5-hour domestic flight to ensure workspace for drafting an urgent client RFP.",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 85,
+      "expected_clause_ids": [
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Paid cabin upgrades such as extra legroom seats over $50 are personal expenses and will not be reimbursed under Clause §1.4.",
+      "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
+      "retrieved_clauses": [
+        "§1.4",
+        "§1.1",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-033",
+      "query": "Spouse accompanied me on a 4-day executive conference in Miami; submitted additional meal and hotel supplement charges.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 340,
+      "expected_clause_ids": [
+        "§4.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Travel, lodging, and meal expenses for spouses are strictly non-reimbursable under Clause §4.4.",
+      "policy_excerpt": "Travel, lodging, and meal expenses for spouses, family members, or traveling companions who are not active company employees on official business are strictly non-reimbursable.",
+      "retrieved_clauses": [
+        "§4.4",
+        "§3.3",
+        "§4.2"
+      ]
+    },
+    {
+      "id": "TC-034",
+      "query": "Rented a Premium Full-Size SUV in Denver because mountain road weather required 4-wheel drive to reach the client facility.",
+      "category": "Ground Transportation",
+      "claimed_amount": 165,
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The claim is rejected because SUV rentals require prior VP approval under Clause §2.3.",
+      "policy_excerpt": "When rental cars are required, reservations must be made for Compact or Intermediate/Mid-Size vehicles only. SUV, Luxury, or Sports car rentals are non-reimbursable without prior VP approval.",
+      "retrieved_clauses": [
+        "§2.3",
+        "§2.1",
+        "§5.1"
+      ]
+    },
+    {
+      "id": "TC-035",
+      "query": "Purchased a 4K external display ($170) and a standing desk riser ($110) for remote work, totaling $280 for the year.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 280,
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "The claim totals $280.00, which exceeds the annual limit of $200.00 USD per calendar year for home office peripherals under Clause §6.1.",
+      "policy_excerpt": "Remote employees may claim essential home office peripherals (e.g., monitor, mouse, keyboard, ergonomic chair) up to an annual limit of $200.00 USD per calendar year.",
+      "retrieved_clauses": [
+        "§6.1",
+        "§6.3",
+        "§6.2"
+      ]
+    },
+    {
+      "id": "TC-036",
+      "query": "Paid a $50 extra legroom seat selection charge on a 4-hour flight due to a recent knee injury (medical note attached).",
+      "category": "Airfare & Flight Travel",
+      "claimed_amount": 50,
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The claim must be rejected because paid cabin upgrades such as extra legroom seats over $50 are strictly personal expenses under Clause §1.4.",
+      "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
+      "retrieved_clauses": [
+        "§1.4",
+        "§1.1",
+        "§4.2"
+      ]
+    },
+    {
+      "id": "TC-037",
+      "query": "Used airport terminal valet parking for 3 days ($105 total) because all long-term economy surface lots were at 100% capacity upon arrival.",
+      "category": "Ground Transportation",
+      "claimed_amount": 105,
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "Valet parking charges are strictly non-reimbursable under Clause §2.4.",
+      "policy_excerpt": "Valet parking and premium short-term terminal parking charges are non-reimbursable.",
+      "retrieved_clauses": [
+        "§2.4",
+        "§2.3",
+        "§2.1"
+      ]
+    },
+    {
+      "id": "TC-038",
+      "query": "Ordered mini-bar water bottles, chocolate, and energy drinks from the hotel room during late-night proposal preparation.",
+      "category": "Alcohol & Prohibited Expenses",
+      "claimed_amount": 42,
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Hotel mini-bar snacks and beverages are non-reimbursable personal expenses under clause §4.2.",
+      "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
+      "retrieved_clauses": [
+        "§4.2",
+        "§5.3",
+        "§5.2"
+      ]
+    },
+    {
+      "id": "TC-039",
+      "query": "Dinner for single traveler during transit in Frankfurt; bill converted to $48 USD for a schnitzel and soft beverage.",
+      "category": "Meals & Business Dining",
+      "claimed_amount": 48,
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "confidence_score": 100,
+      "reason": "The dinner expense of $48.00 exceeds the individual meal limit of $40.00 for dinner under Clause §3.2 by more than 1.5x.",
+      "policy_excerpt": "Individual meals during single-day travel or non-overnight trips are capped as follows: Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00).",
+      "retrieved_clauses": [
+        "§3.2",
+        "§3.1",
+        "§5.1"
+      ]
+    },
+    {
+      "id": "TC-040",
+      "query": "Overnighted critical legal deposition documents to federal court via courier, costing $65 with urgent courier receipt attached.",
+      "category": "Remote Office Supplies & Software",
+      "claimed_amount": 65,
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "confidence_score": 100,
+      "reason": "Expedited courier shipping exceeding $40.00 is permitted as it includes the required written justification for business urgency per Clause §6.3.",
+      "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
+      "retrieved_clauses": [
+        "§6.3",
+        "§2.1",
+        "§2.2"
+      ]
+    }
+  ]
+}

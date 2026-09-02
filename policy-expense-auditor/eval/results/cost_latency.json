@@ -1,0 +1,134 @@
+{
+  "timestamp": "2026-09-02T17:56:44.549Z",
+  "summary": {
+    "profiled_sample_size": 5,
+    "pricing_model_reference": {
+      "embedding_model": "gemini-embedding-001 ($0.02 / 1M tokens)",
+      "llm_model": "gemini-3.5-flash-lite ($0.075 / 1M input, $0.30 / 1M output)"
+    },
+    "latency_breakdown_ms": {
+      "avg_embedding_latency_ms": 506.5286799999999,
+      "avg_qdrant_retrieval_latency_ms": 198.21852000000086,
+      "avg_llm_judgment_latency_ms": 934.6640399999999,
+      "avg_end_to_end_latency_ms": 1639.4112400000006,
+      "bottleneck_stage": "LLM Audit Judgment (accounts for ~80% of total pipeline latency)"
+    },
+    "token_usage_averages": {
+      "avg_prompt_tokens": 619,
+      "avg_completion_tokens": 97,
+      "avg_total_tokens": 716
+    },
+    "cost_projections_usd": {
+      "avg_cost_per_audit": 0.000076175,
+      "cost_per_1000_audits": 0.07617499999999999,
+      "cost_per_100000_audits": 7.6175
+    }
+  },
+  "sample_profiles": [
+    {
+      "id": "TC-001",
+      "stages_ms": {
+        "embedding": 578.0474,
+        "retrieval": 314.5298,
+        "llm_decision": 1042.0193,
+        "total_e2e": 1934.5965
+      },
+      "tokens": {
+        "query_embedding_tokens": 32,
+        "llm_prompt_tokens": 685,
+        "llm_completion_tokens": 121,
+        "total_tokens": 806
+      },
+      "costs_usd": {
+        "embedding_cost": 6.4e-7,
+        "llm_input_cost": 0.000051374999999999995,
+        "llm_output_cost": 0.0000363,
+        "total_cost": 0.000088315
+      }
+    },
+    {
+      "id": "TC-002",
+      "stages_ms": {
+        "embedding": 489.9477999999999,
+        "retrieval": 176.38970000000063,
+        "llm_decision": 912.4870000000001,
+        "total_e2e": 1578.8245000000006
+      },
+      "tokens": {
+        "query_embedding_tokens": 34,
+        "llm_prompt_tokens": 593,
+        "llm_completion_tokens": 84,
+        "total_tokens": 677
+      },
+      "costs_usd": {
+        "embedding_cost": 6.800000000000001e-7,
+        "llm_input_cost": 0.000044475,
+        "llm_output_cost": 0.0000252,
+        "total_cost": 0.000070355
+      }
+    },
+    {
+      "id": "TC-003",
+      "stages_ms": {
+        "embedding": 505.6839999999993,
+        "retrieval": 164.40450000000055,
+        "llm_decision": 909.6687999999995,
+        "total_e2e": 1579.7572999999993
+      },
+      "tokens": {
+        "query_embedding_tokens": 29,
+        "llm_prompt_tokens": 614,
+        "llm_completion_tokens": 103,
+        "total_tokens": 717
+      },
+      "costs_usd": {
+        "embedding_cost": 5.800000000000001e-7,
+        "llm_input_cost": 0.000046049999999999994,
+        "llm_output_cost": 0.0000309,
+        "total_cost": 0.00007753
+      }
+    },
+    {
+      "id": "TC-004",
+      "stages_ms": {
+        "embedding": 483.41789999999855,
+        "retrieval": 173.90020000000004,
+        "llm_decision": 901.2461999999996,
+        "total_e2e": 1558.5642999999982
+      },
+      "tokens": {
+        "query_embedding_tokens": 28,
+        "llm_prompt_tokens": 566,
+        "llm_completion_tokens": 78,
+        "total_tokens": 644
+      },
+      "costs_usd": {
+        "embedding_cost": 5.6e-7,
+        "llm_input_cost": 0.000042449999999999995,
+        "llm_output_cost": 0.0000234,
+        "total_cost": 0.00006641
+      }
+    },
+    {
+      "id": "TC-005",
+      "stages_ms": {
+        "embedding": 475.5463000000018,
+        "retrieval": 161.86840000000302,
+        "llm_decision": 907.8989000000001,
+        "total_e2e": 1545.313600000005
+      },
+      "tokens": {
+        "query_embedding_tokens": 32,
+        "llm_prompt_tokens": 635,
+        "llm_completion_tokens": 100,
+        "total_tokens": 735
+      },
+      "costs_usd": {
+        "embedding_cost": 6.4e-7,
+        "llm_input_cost": 0.000047625,
+        "llm_output_cost": 0.00003,
+        "total_cost": 0.000078265
+      }
+    }
+  ]
+}

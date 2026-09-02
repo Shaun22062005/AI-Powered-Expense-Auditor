@@ -1,0 +1,2279 @@
+{
+  "timestamp": "2026-09-02T14:54:24.565Z",
+  "summary": {
+    "total_queries": 40,
+    "pipeline_a_single_stage": {
+      "macro_recall_at_3": 0.9875,
+      "macro_precision_at_3": 0.36666666666666675,
+      "macro_mrr": 0.9625
+    },
+    "pipeline_b_two_stage_reranked": {
+      "macro_recall_at_3": 0.9875,
+      "macro_precision_at_3": 0.36666666666666675,
+      "macro_mrr": 0.975
+    },
+    "lift": {
+      "delta_recall_at_3": 0,
+      "delta_precision_at_3": 0,
+      "delta_mrr": 0.012499999999999956
+    },
+    "improved_count": 2,
+    "regressed_count": 1,
+    "unchanged_count": 37
+  },
+  "queries": [
+    {
+      "id": "TC-001",
+      "query": "Hailed a standard yellow cab from Chicago O'Hare terminal to the downtown hotel where the regional sales summit is being hosted.",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§5.1",
+          "§2.3"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§3.1",
+          "§1.1"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.1",
+            "score": 0.985
+          },
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-002",
+      "query": "Booked roundtrip basic coach airfare on Delta from Boston to Atlanta for the Q3 operations review meeting three weeks before the flight.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-003",
+      "query": "Grabbed a quick breakfast sandwich and coffee at Starbucks during a one-day trip to our Hartford warehouse location.",
+      "category": "Meals & Business Dining",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§5.1",
+          "§6.3"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§5.1",
+          "§6.3"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.3",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-004",
+      "query": "Purchased an ergonomic wireless split keyboard and vertical mouse for my daily remote engineering workstation.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§5.3",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§5.3",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-005",
+      "query": "Paid for high-speed in-room Wi-Fi connection for 3 nights at the Marriott during a business visit to the Dallas client office.",
+      "category": "Hotel & Lodging",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§4.2",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§4.2",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-006",
+      "query": "Parked in the airport economy long-term surface lot for 4 days while attending the annual tech conference in Las Vegas.",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§2.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§2.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-007",
+      "query": "Submitted a receipt for a double IPA craft beer ordered at the hotel lobby bar after the client dinner concluded.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§4.1",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.1",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§4.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-008",
+      "query": "Reimbursing a municipal parking meter ticket received while parked outside the customer site during an afternoon meeting.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§4.3",
+          "§2.4",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§4.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.3",
+          "§2.4",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§4.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§4.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-009",
+      "query": "Purchased an in-flight movie and watched pay-per-view films in the hotel room after work hours.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§5.2",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§5.2",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-010",
+      "query": "Booked an urgent one-way plane ticket 4 days before traveling to fix a critical production outage at our Phoenix data center.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§1.3"
+        ],
+        "hit_clauses": [
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§1.3"
+        ],
+        "hit_clauses": [
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.3",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-011",
+      "query": "Reserved an Uber Black premium sedan from the airport to the hotel because regular rides had long queues.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.3",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.3",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-012",
+      "query": "Drove my personal Honda Civic 180 miles roundtrip to deliver backup hardware to a customer branch site.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§2.3"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§2.3"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-013",
+      "query": "Claimed 25 miles per day for my daily drive between my home in Jersey City and the company HQ office in Manhattan.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-014",
+      "query": "Stayed 2 nights at the Hyatt Regency in downtown San Francisco at a nightly room rate of $240 before taxes for a partner summit.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§2.1",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§2.1",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-015",
+      "query": "Booked a standard hotel room in Cleveland for 2 nights at $235 per night due to an ongoing medical convention.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§5.2",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§5.2",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-016",
+      "query": "Hosted a business dinner for 4 people (myself + 3 Acme Corp client stakeholders); total meal was $360 including tax and 18% tip.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.3",
+          "§3.4",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.3",
+          "§3.4",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-017",
+      "query": "Dinner with 2 prospective partners to review vendor RFP responses; invoice came to $340 for the 3 of us.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.3",
+          "§3.4",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.1",
+          "§3.3",
+          "§3.4"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 0.5,
+        "top_candidates": [
+          {
+            "clause": "§4.1",
+            "score": 0.65
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": -0.5
+      },
+      "improved": false,
+      "regressed": true
+    },
+    {
+      "id": "TC-018",
+      "query": "Full day meals during overnight travel in Denver: Breakfast ($18), Lunch ($24), and Dinner ($45), totaling $87.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§3.1",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 0.5
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.1",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.1",
+            "score": 0.985
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0.5
+      },
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "id": "TC-019",
+      "query": "Combined food total for a single day of travel came to $125 across room service and lunch.",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.1",
+          "§3.2",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.1",
+          "§3.2",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-020",
+      "query": "Paid for the rental car company's prepaid full tank of gas option and supplementary liability insurance at counter check-in.",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§1.4",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§1.4",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-021",
+      "query": "Hotel dry cleaning and laundry service bill incurred on the 6th day of an 8-day multi-city training roadshow.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§5.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§5.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-022",
+      "query": "Submitted a 2-day business trip hotel laundry invoice for shirt pressing before an executive breakfast.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§3.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§3.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-023",
+      "query": "Monthly subscription for GitHub Copilot Pro and JetBrains IDE tools utilized for daily software development tasks.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§6.1",
+          "§5.3"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§6.1",
+          "§5.3"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.3",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-024",
+      "query": "Monthly enterprise workspace AI assistant subscription claimed without submitting IT security approval ticket.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§5.3",
+          "§6.1"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§5.3",
+          "§6.1"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-025",
+      "query": "Overnight expedited courier delivery of signed commercial contracts to counterparty counsel before the fiscal deadline.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§1.3",
+          "§1.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§1.3",
+          "§1.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-026",
+      "query": "Upgraded domestic flight from Seattle to San Francisco to First Class out of personal pocket and submitted full ticket.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-027",
+      "query": "Missed the hotel cancellation deadline by 2 hours due to a delayed client meeting, incurring a one-night room penalty charge.",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§5.3",
+          "§5.1",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§5.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§5.3",
+          "§5.1",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§5.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§5.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-028",
+      "query": "Team celebratory dinner with 5 colleagues after product launch; we split the $500 total check onto two employee cards ($250 each).",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.4",
+          "§3.3",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.4",
+          "§3.3",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-029",
+      "query": "Hosted 2 VP clients for dinner ($180 total food), but the receipt includes an itemized $65 Cabernet Sauvignon wine bottle.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.3",
+        "§4.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.4",
+          "§3.3",
+          "§4.1"
+        ],
+        "hit_clauses": [
+          "§3.3",
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 0.5
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.4",
+          "§3.3",
+          "§4.1"
+        ],
+        "hit_clauses": [
+          "§3.3",
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 0.5,
+        "top_candidates": [
+          {
+            "clause": "§3.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-030",
+      "query": "Took a 45-mile Uber from Dulles Airport during an intense snowstorm; surge pricing pushed the fare to $84.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.4",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.4",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-031",
+      "query": "Booked flight from London to New York 8 weeks in advance in standard economy, but did not request VP approval beforehand.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§1.1"
+        ],
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 0.5
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.3",
+          "§1.2",
+          "§6.1"
+        ],
+        "hit_clauses": [
+          "§1.3"
+        ],
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.3",
+            "score": 0.985
+          },
+          {
+            "clause": "§1.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0.5
+      },
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "id": "TC-032",
+      "query": "Paid an $85 Economy Plus extra-legroom upgrade fee on a 5-hour domestic flight to ensure workspace for drafting an urgent client RFP.",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-033",
+      "query": "Spouse accompanied me on a 4-day executive conference in Miami; submitted additional meal and hotel supplement charges.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§4.4",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§4.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.4",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§4.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§4.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-034",
+      "query": "Rented a Premium Full-Size SUV in Denver because mountain road weather required 4-wheel drive to reach the client facility.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§2.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§2.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-035",
+      "query": "Purchased a 4K external display ($170) and a standing desk riser ($110) for remote work, totaling $280 for the year.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§6.3",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§6.3",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§6.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-036",
+      "query": "Paid a $50 extra legroom seat selection charge on a 4-hour flight due to a recent knee injury (medical note attached).",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§1.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§1.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-037",
+      "query": "Used airport terminal valet parking for 3 days ($105 total) because all long-term economy surface lots were at 100% capacity upon arrival.",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§2.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§2.3",
+          "§2.1"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§2.4",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-038",
+      "query": "Ordered mini-bar water bottles, chocolate, and energy drinks from the hotel room during late-night proposal preparation.",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§5.3",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§5.3",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§4.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-039",
+      "query": "Dinner for single traveler during transit in Frankfurt; bill converted to $48 USD for a schnitzel and soft beverage.",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§3.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§3.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§3.2",
+            "score": 0.5
+          },
+          {
+            "clause": "§3.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§5.1",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "id": "TC-040",
+      "query": "Overnighted critical legal deposition documents to federal court via courier, costing $65 with urgent courier receipt attached.",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "pipeline_a_dense": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§2.1",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1
+      },
+      "pipeline_b_reranked": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§2.1",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "top_candidates": [
+          {
+            "clause": "§6.3",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.1",
+            "score": 0.5
+          },
+          {
+            "clause": "§2.2",
+            "score": 0.5
+          }
+        ]
+      },
+      "delta": {
+        "delta_recall_at_3": 0,
+        "delta_precision_at_3": 0,
+        "delta_mrr": 0
+      },
+      "improved": false,
+      "regressed": false
+    }
+  ]
+}
