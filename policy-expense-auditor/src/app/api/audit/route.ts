@@ -56,11 +56,21 @@ export async function POST(req: NextRequest) {
 
     if (claimError) throw new Error(`Claim insertion failed: ${claimError.message}`);
 
-    const embedding = await embedText(manualData.category || extractedData.category);
+    // Construct rich semantic query incorporating category, merchant, business purpose, and amount
+    const queryParts = [
+      manualData.category || extractedData.category,
+      manualData.merchant || extractedData.merchant ? `at ${manualData.merchant || extractedData.merchant}` : '',
+      manualData.business_purpose ? `Purpose: ${manualData.business_purpose}` : '',
+      manualData.amount || extractedData.amount ? `Amount: ${manualData.amount || extractedData.amount} ${manualData.currency || extractedData.currency || 'USD'}` : ''
+    ].filter(Boolean);
+    const queryText = queryParts.join(' | ');
+
+    const embedding = await embedText(queryText);
     const searchResult = await qdrant.search('policies', {
       vector: embedding,
       limit: 3,
     });
+    console.log('Qdrant Search Query:', queryText);
     console.log('Qdrant Search Results:', JSON.stringify(searchResult, null, 2));
 
     const policyContext = searchResult.map(r => r.payload?.content).filter(Boolean).join('\n');

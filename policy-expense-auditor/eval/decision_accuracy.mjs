@@ -37,6 +37,29 @@ const qdrant = new QdrantClient({
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
+const AUDIT_PROMPT = `You are a precise corporate expense compliance auditor. Compare the expense claim against the policy context provided. 
+
+Categorize the claim into exactly one of three statuses:
+1. "approved": The claim strictly adheres to all stated policy rules and expense caps.
+2. "flagged": The claim requires human manager review or supplementary documentation before reimbursement. Use "flagged" for:
+   - Claims with missing pre-authorization documentation (e.g., booking without 14-day advance notice, missing VP approval ticket, missing itemized attendee list).
+   - Emergency or justified surge exceptions (e.g., weather surge pricing, sold-out standard facilities).
+   - Minor dollar overages within 1.5x of the meal or per-diem cap.
+3. "rejected": The claim contains explicit, non-reimbursable policy violations. Use "rejected" with zero tolerance for:
+   - Any alcohol charges (beer, wine, spirits, cocktails, minibar alcohol).
+   - Traffic violations, speeding tickets, and parking meter fines.
+   - Luxury travel tiers (First Class airfare, luxury rideshare tiers like Uber Black).
+   - Commute expenses between home and primary office.
+   - Expenses exceeding allowable caps by more than 1.5x.
+
+Return ONLY a raw JSON object with exactly these four keys:
+- status: "approved" | "flagged" | "rejected"
+- reason: One clear sentence explaining the verdict citing the exact policy section number (e.g., "§1.2", "§3.1").
+- policy_excerpt: The exact policy sentence or clause referenced (never null).
+- confidence_score: An integer between 0 and 100 representing confidence in this audit assessment.
+
+No markdown, no backticks, no extra text.`;
+
 async function embedText(text, retries = 4) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${GEMINI_API_KEY}`;
   
@@ -76,8 +99,6 @@ async function embedText(text, retries = 4) {
   }
 }
 
-const AUDIT_SYSTEM_PROMPT = `You are a strict corporate expense auditor. Compare the expense claim against the policy chunks provided. You must apply these rules with zero tolerance: (1) Any claim containing alcohol charges such as beer, wine, whiskey, spirits, cocktails, or any alcoholic beverage must always be status rejected, never flagged. (2) Any expense exceeding the per-person meal limit for the city must be rejected if over 1.5x the limit, or flagged if within 1.5x. (3) Flagged status is only for borderline cases where the violation is ambiguous or requires human review. Rejected is for clear policy violations. (4) Approved is for claims that strictly adhere to all policy rules. Return ONLY a raw JSON object with exactly these four keys: status (one of approved, flagged, or rejected), reason (one sentence explaining the verdict citing the exact policy section number), policy_excerpt (the exact policy clause used, never null), confidence_score (an integer between 0 and 100). No markdown, no extra text.`;
-
 async function runAuditDecision(claimPayload, policyContext, retries = 6) {
   const models = ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-3-flash-preview'];
 
@@ -97,7 +118,7 @@ Audit this expense claim against the policy context provided.
     const modelName = models[attempt % models.length];
     const model = genAI.getGenerativeModel({
       model: modelName,
-      systemInstruction: AUDIT_SYSTEM_PROMPT,
+      systemInstruction: AUDIT_PROMPT,
       generationConfig: {
         responseMimeType: "application/json",
         temperature: 0.0
@@ -126,7 +147,7 @@ Audit this expense claim against the policy context provided.
 
 async function runDecisionAccuracyBenchmark() {
   const collectionName = 'policies_eval_boundary';
-  console.log(`[WS6] Starting End-to-End Decision Accuracy Benchmark (Collection: ${collectionName})...`);
+  console.log(`[WS6] Starting End-to-End Decision Accuracy Benchmark (Calibrated Prompt, Collection: ${collectionName})...`);
 
   const datasetPath = path.join(__dirname, 'dataset.json');
   const dataset = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
@@ -136,7 +157,6 @@ async function runDecisionAccuracyBenchmark() {
   if (fs.existsSync(cachePath)) {
     try {
       evaluations = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
-      console.log(`[WS6] Resuming from cache with ${evaluations.length} already audited claims.`);
     } catch (e) {
       evaluations = [];
     }
@@ -172,7 +192,7 @@ async function runDecisionAccuracyBenchmark() {
       currency: testCase.currency || 'USD'
     };
 
-    // 2. Call Gemini for audit decision
+    // 2. Call Gemini for calibrated audit decision
     const verdict = await runAuditDecision(claimPayload, policyContext);
 
     const actualDecision = verdict.status.toLowerCase().trim();
@@ -272,7 +292,7 @@ async function runDecisionAccuracyBenchmark() {
     evaluations
   }, null, 2));
 
-  console.log(`[WS6] Decision accuracy results saved to ${outputPath}`);
+  console.log(`[WS6] Calibrated Decision accuracy results saved to ${outputPath}`);
   return summary;
 }
 

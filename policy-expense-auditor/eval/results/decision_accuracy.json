@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-02T17:08:25.241Z",
+  "timestamp": "2026-09-04T08:58:43.251Z",
   "summary": {
     "total_audits": 40,
-    "overall_accuracy": 0.725,
+    "overall_accuracy": 0.85,
     "confusion_matrix": {
       "approved": {
-        "approved": 11,
-        "flagged": 0,
-        "rejected": 2
+        "approved": 9,
+        "flagged": 3,
+        "rejected": 1
       },
       "flagged": {
-        "approved": 2,
-        "flagged": 3,
-        "rejected": 7
+        "approved": 1,
+        "flagged": 10,
+        "rejected": 1
       },
       "rejected": {
         "approved": 0,
@@ -23,30 +23,30 @@
     "class_metrics": {
       "approved": {
         "support": 13,
-        "true_positives": 11,
-        "false_positives": 2,
-        "false_negatives": 2,
-        "precision": 0.8461538461538461,
-        "recall": 0.8461538461538461,
-        "f1_score": 0.8461538461538461
+        "true_positives": 9,
+        "false_positives": 1,
+        "false_negatives": 4,
+        "precision": 0.9,
+        "recall": 0.6923076923076923,
+        "f1_score": 0.7826086956521738
       },
       "flagged": {
         "support": 12,
-        "true_positives": 3,
-        "false_positives": 0,
-        "false_negatives": 9,
-        "precision": 1,
-        "recall": 0.25,
-        "f1_score": 0.4
+        "true_positives": 10,
+        "false_positives": 3,
+        "false_negatives": 2,
+        "precision": 0.7692307692307693,
+        "recall": 0.8333333333333334,
+        "f1_score": 0.8
       },
       "rejected": {
         "support": 15,
         "true_positives": 15,
-        "false_positives": 9,
+        "false_positives": 2,
         "false_negatives": 0,
-        "precision": 0.625,
+        "precision": 0.8823529411764706,
         "recall": 1,
-        "f1_score": 0.7692307692307693
+        "f1_score": 0.9375
       }
     },
     "compliance_risk_analysis": {
@@ -70,7 +70,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The taxi claim strictly adheres to the policy rules as it is a standard one-way trip under the maximum limit of $50.00 as outlined in Clause §2.1.",
+      "reason": "The taxi expense adheres to policy §2.1 as it is a standard ground transportation trip under the maximum cap of $50.00 per single one-way trip.",
       "policy_excerpt": "Taxis, rideshares (Uber, Lyft standard / comfort), and public transit incurred directly for business travel between airports, lodging, and client/work sites are reimbursable up to a maximum of $50.00 per single one-way trip.",
       "retrieved_clauses": [
         "§2.1",
@@ -91,7 +91,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The flight was booked three weeks in advance which complies with the 14-day advance booking requirement and standard economy class policy under Clause §1.2 and §1.1.",
+      "reason": "The claim adheres to standard coach booking guidelines and was booked three weeks in advance, satisfying §1.2.",
       "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares.",
       "retrieved_clauses": [
         "§1.2",
@@ -111,8 +111,8 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The individual meal expense of $13.25 for breakfast is within the $15.00 limit outlined in Clause §3.2.",
-      "policy_excerpt": "Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00). Individual meal expenses within these thresholds are approved automatically.",
+      "reason": "The individual breakfast expense of $13.25 is within the allowable cap of $15.00 per §3.2.",
+      "policy_excerpt": "Individual meals during single-day travel or non-overnight trips are capped as follows: Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00).",
       "retrieved_clauses": [
         "§3.2",
         "§5.1",
@@ -128,10 +128,10 @@
         "§6.1"
       ],
       "expected_decision": "approved",
-      "actual_decision": "rejected",
+      "actual_decision": "flagged",
       "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The claim is rejected because all hardware purchases require prior written approval from the direct manager prior to purchasing according to Clause §6.1.",
+      "confidence_score": 95,
+      "reason": "The peripheral hardware purchase lacks documentation of prior written approval from the direct manager as required by §6.1.",
       "policy_excerpt": "All hardware purchases require prior written approval from the direct manager prior to purchasing.",
       "retrieved_clauses": [
         "§6.1",
@@ -151,7 +151,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim adheres to policy §5.2 as high-speed in-room internet is reimbursable up to $15.00/day ($45 total for 3 days).",
+      "reason": "The claim adheres to §5.2 as high-speed in-room internet is reimbursable up to $15.00/day ($45.00 total for 3 days).",
       "policy_excerpt": "High-speed in-room internet access is reimbursable up to $15.00/day if not provided complimentary by the hotel.",
       "retrieved_clauses": [
         "§5.2",
@@ -171,7 +171,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim adheres to policy as the airport parking was in the economy long-term lot at $25 per day, which is under the $30.00 daily cap outlined in Clause §2.4.",
+      "reason": "The claim adheres to §2.4 by utilizing the airport economy long-term parking lot and remaining within the maximum daily cap of $30.00 per day for 4 days ($120 allowable, claimed $100).",
       "policy_excerpt": "Airport parking is reimbursable only for economy / long-term parking lots up to a maximum daily cap of $30.00 per day.",
       "retrieved_clauses": [
         "§2.4",
@@ -191,7 +191,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim contains an explicit charge for beer, which violates the strict alcohol prohibition outlined in Clause §4.1.",
+      "reason": "The claim is rejected because it includes an explicit charge for a craft beer, violating the strict alcohol prohibition policy under §4.1.",
       "policy_excerpt": "The company maintains a strict zero-tolerance policy regarding alcohol reimbursement. Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
       "retrieved_clauses": [
         "§4.1",
@@ -211,7 +211,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Parking tickets and fines incurred during business travel are the sole responsibility of the employee under Clause §4.3.",
+      "reason": "Parking meter fines are strictly the personal responsibility of the employee and will be rejected with zero exceptions per §4.3.",
       "policy_excerpt": "Any moving violations, speeding tickets, parking fines, toll violations, or vehicle towing fees incurred during business travel are the sole legal and financial responsibility of the employee and will be rejected with zero exceptions.",
       "retrieved_clauses": [
         "§4.3",
@@ -231,7 +231,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim is rejected because hotel pay-per-view movies and in-flight entertainment fees are strictly non-reimbursable personal expenses under Clause §4.2.",
+      "reason": "The claim is rejected because hotel pay-per-view movies and in-flight entertainment fees are explicitly classified as non-reimbursable personal expenses under §4.2.",
       "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
       "retrieved_clauses": [
         "§4.2",
@@ -250,9 +250,9 @@
       "expected_decision": "flagged",
       "actual_decision": "flagged",
       "is_correct": true,
-      "confidence_score": 95,
-      "reason": "The flight was booked within 14 days of departure without attached Director-level approval, violating Clause §1.2.",
-      "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares. Flights booked within 14 days of departure require written Director-level approval attached to the claim; otherwise, the claim will be flagged for review.",
+      "confidence_score": 98,
+      "reason": "The flight was booked within 14 days of departure without attached written Director-level approval, per §1.2.",
+      "policy_excerpt": "Flights booked within 14 days of departure require written Director-level approval attached to the claim; otherwise, the claim will be flagged for review.",
       "retrieved_clauses": [
         "§1.2",
         "§1.1",
@@ -271,7 +271,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim is rejected because luxury rideshare tiers like Uber Black are strictly non-reimbursable under Clause §2.1.",
+      "reason": "Luxury rideshare tiers such as Uber Black are strictly non-reimbursable per §2.1.",
       "policy_excerpt": "Luxury rideshare tiers (Uber Black, Lyft Lux) are strictly non-reimbursable.",
       "retrieved_clauses": [
         "§2.1",
@@ -291,7 +291,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim adheres to corporate policy §2.2 as personal vehicle mileage for approved business travel is reimbursable at the standard rate of $0.67 per mile.",
+      "reason": "The claim adheres to the standard corporate mileage rate of $0.67 per mile for business travel to a client site under §2.2.",
       "policy_excerpt": "Employees using personal vehicles for approved business travel may claim mileage at the standard corporate rate of $0.67 per mile.",
       "retrieved_clauses": [
         "§2.2",
@@ -311,7 +311,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Daily commuting between an employee's residence and their designated primary office is not eligible for reimbursement under Clause §2.2.",
+      "reason": "Daily commuting between an employee's residence and their designated primary office is strictly non-reimbursable per §2.2.",
       "policy_excerpt": "Daily commuting between an employee's residence and their designated primary office is not eligible for reimbursement under any circumstance.",
       "retrieved_clauses": [
         "§2.2",
@@ -331,7 +331,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The nightly room rate of $240.00 in San Francisco is within the Tier 1 metropolitan city cap of $250.00 per night as outlined in Clause §5.1.",
+      "reason": "The nightly room rate of $240.00 is within the $250.00/night cap for Tier 1 metropolitan cities in accordance with §5.1.",
       "policy_excerpt": "Nightly room rates are capped at $250.00/night (before local taxes) in designated Tier 1 metropolitan cities (NYC, SF, London, Tokyo, Zurich) and $180.00/night in all other locations.",
       "retrieved_clauses": [
         "§5.1",
@@ -348,11 +348,11 @@
         "§5.1"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The nightly room rate of $235.00 in Cleveland exceeds the non-Tier 1 cap of $180.00 by more than 20% without prior approval under Clause §5.1.",
-      "policy_excerpt": "Nightly room rates are capped at $250.00/night (before local taxes) in designated Tier 1 metropolitan cities (NYC, SF, London, Tokyo, Zurich) and $180.00/night in all other locations. Rates exceeding these caps by up to 20% due to peak city events will be flagged for review; rates exceeding 20% without prior approval will be rejected.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 90,
+      "reason": "The nightly rate of $235.00 exceeds the non-Tier 1 cap of $180.00 by approximately 30.5% (which is between 20% and 50% over the cap), requiring review under §5.1.",
+      "policy_excerpt": "Rates exceeding these caps by up to 20% due to peak city events will be flagged for review; rates exceeding 20% without prior approval will be rejected.",
       "retrieved_clauses": [
         "§5.1",
         "§5.2",
@@ -370,9 +370,9 @@
       "expected_decision": "approved",
       "actual_decision": "rejected",
       "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The claim of $360 for 4 people averages $90 per person, which complies with Clause §3.3, but the total daily meal per diem cap of $75.00 under Clause §3.1 is exceeded by more than 1.5x ($112.50), mandating rejection.",
-      "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+      "confidence_score": 95,
+      "reason": "The claim exceeds the $100 per person maximum cap for client entertainment under §3.3 ($360 total for 4 people equates to $90 per person, but the claim as a single lump sum violates the per person calculation rules and total dining bounds when compared against combined limits). Wait, recalculation: $360 for 4 people is $90 per person, which is under the $100 cap, however, missing itemized receipt and attendee list triggers §3.3 violations, or since it exceeds 1.5x daily per diem if categorized under regular per diem, but it's client entertainment. Let's re-evaluate: $360 total divided by 4 is $90/person. But wait, if it's missing attendee company affiliations and business topic, it's flagged. Let's use flagged if missing documentation. Wait, the prompt says missing itemized attendee list is 'flagged'. Let's correct to flagged.",
+      "policy_excerpt": "All client entertainment claims must include an itemized receipt and a complete list of attendees with their company affiliations and business discussion topic.",
       "retrieved_clauses": [
         "§3.3",
         "§3.4",
@@ -391,7 +391,7 @@
       "actual_decision": "rejected",
       "is_correct": false,
       "confidence_score": 100,
-      "reason": "The claim of $340 for 3 people ($113.33 per person) exceeds the $100.00 USD per person meal limit under Clause §3.3.",
+      "reason": "The claim of $340 for 3 people equals $113.33 per person, which exceeds the allowable $100 per person cap by more than 1.5x based on §3.3.",
       "policy_excerpt": "Meals hosted with external clients, partners, or prospective accounts are reimbursable up to a maximum of $100.00 USD per person (including host).",
       "retrieved_clauses": [
         "§3.3",
@@ -411,7 +411,7 @@
       "actual_decision": "flagged",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The daily meal total of $87.00 exceeds the $75.00 daily cap but is within 1.5x of the limit under Clause §3.1.",
+      "reason": "The daily total meal amount of $87.00 exceeds the $75.00 daily per diem cap but is within 1.5x ($112.50) as specified in §3.1.",
       "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
       "retrieved_clauses": [
         "§3.2",
@@ -431,7 +431,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The daily meal expense of $125.00 exceeds 1.5x the $75.00 daily per diem cap, violating Clause §3.1.",
+      "reason": "The claimed amount of $125.00 exceeds 1.5x the daily per diem cap of $75.00 (§3.1).",
       "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
       "retrieved_clauses": [
         "§3.1",
@@ -451,7 +451,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim includes prepaid fuel and optional rental insurance which are strictly non-reimbursable per Clause §2.3.",
+      "reason": "Prepaid fuel options and optional rental insurance are explicitly non-reimbursable under §2.3.",
       "policy_excerpt": "Prepaid fuel options and optional rental insurance (covered by corporate credit card policy) will be rejected.",
       "retrieved_clauses": [
         "§2.3",
@@ -471,7 +471,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim is approved because laundry and dry cleaning services are reimbursable for business trips lasting five consecutive business days or longer under Clause §5.2.",
+      "reason": "The claim adheres to §5.2 because laundry and dry cleaning services are reimbursable for business trips lasting five consecutive business days or longer.",
       "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
       "retrieved_clauses": [
         "§5.2",
@@ -491,7 +491,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Laundry and dry cleaning services are reimbursable only for business trips lasting five consecutive business days or longer per Clause §5.2.",
+      "reason": "Laundry services are only reimbursable for business trips lasting five consecutive business days or longer per §5.2.",
       "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
       "retrieved_clauses": [
         "§5.2",
@@ -508,10 +508,10 @@
         "§6.2"
       ],
       "expected_decision": "approved",
-      "actual_decision": "approved",
-      "is_correct": true,
-      "confidence_score": 100,
-      "reason": "The software subscription amount of $39.00 USD is within the $50.00/month cap specified in Clause §6.2.",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "confidence_score": 95,
+      "reason": "The software subscription charge requires approval from the IT Department per §6.2.",
       "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool.",
       "retrieved_clauses": [
         "§6.2",
@@ -530,9 +530,9 @@
       "expected_decision": "flagged",
       "actual_decision": "flagged",
       "is_correct": true,
-      "confidence_score": 95,
-      "reason": "The software subscription amount of $80.00/month exceeds the $50.00/month cap and was claimed without IT approval, resulting in a flag per clause §6.2.",
-      "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool. Unapproved software charges will be flagged.",
+      "confidence_score": 98,
+      "reason": "The software subscription amount of $80.00 exceeds the $50.00/month cap and lacks required IT approval per §6.2.",
+      "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool.",
       "retrieved_clauses": [
         "§6.2",
         "§5.3",
@@ -551,7 +551,7 @@
       "actual_decision": "approved",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The expedited courier shipping fee is under the $40.00 threshold and therefore fully reimbursable under Clause §6.3.",
+      "reason": "The claim adheres to §6.3 as it is for expedited shipping below the $40.00 threshold where written justification is not required.",
       "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
       "retrieved_clauses": [
         "§6.3",
@@ -572,8 +572,8 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Business Class or Premium Economy travel is strictly prohibited for flights under 6 hours per Clause §1.1.",
-      "policy_excerpt": "All domestic and short-haul international flights (under 6 hours in duration) must be booked in standard Economy / Coach class. Business Class or Premium Economy travel is strictly prohibited for flights under 6 hours unless an executive medical exemption is on file with People Operations.",
+      "reason": "Paid cabin upgrades to First Class are strictly prohibited personal expenses under §1.4 and §1.1.",
+      "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
       "retrieved_clauses": [
         "§1.4",
         "§1.1",
@@ -589,10 +589,10 @@
         "§5.3"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
+      "actual_decision": "flagged",
+      "is_correct": true,
       "confidence_score": 95,
-      "reason": "Hotel cancellation penalties will be rejected unless caused by an unavoidable business emergency documented in writing per Clause §5.3.",
+      "reason": "The late cancellation fee requires human review as it was caused by an unavoidable business emergency documented in writing per §5.3.",
       "policy_excerpt": "No-show penalties and late cancellation fees will be rejected unless caused by an unavoidable business emergency documented in writing.",
       "retrieved_clauses": [
         "§5.3",
@@ -612,7 +612,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Splitting a single group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited under Clause §3.4.",
+      "reason": "Splitting a single group dining bill across multiple employee expense claims to circumvent individual limits is strictly prohibited per §3.4.",
       "policy_excerpt": "Splitting a single group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited.",
       "retrieved_clauses": [
         "§3.4",
@@ -633,7 +633,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim was rejected because it contains charges for an alcoholic beverage, violating Clause §4.1 Strict Alcohol Prohibition (Zero Tolerance).",
+      "reason": "The claim contains an explicit alcohol purchase, violating §4.1 regarding the zero-tolerance policy for alcohol reimbursement.",
       "policy_excerpt": "Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
       "retrieved_clauses": [
         "§3.4",
@@ -650,10 +650,10 @@
         "§2.1"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "approved",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The rideshare trip exceeded $50.00 but included a valid business reason detailing surge pricing due to a snowstorm, which complies with Clause §2.1.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 95,
+      "reason": "The rideshare fare exceeds the $50.00 cap due to weather surge pricing, which requires a business reason detailing distance or surge pricing per §2.1.",
       "policy_excerpt": "Rideshare trips exceeding $50.00 require a business reason detailing distance or surge pricing.",
       "retrieved_clauses": [
         "§2.1",
@@ -674,7 +674,7 @@
       "actual_decision": "approved",
       "is_correct": false,
       "confidence_score": 100,
-      "reason": "The flight was booked 8 weeks in advance satisfying Clause 1.2 and in standard economy satisfying Clause 1.1.",
+      "reason": "The flight was booked 8 weeks in advance satisfying the advance booking rule, and economy class was selected per §1.1.",
       "policy_excerpt": "All flight reservations must be booked at least 14 days in advance of the departure date to take advantage of corporate fares.",
       "retrieved_clauses": [
         "§1.2",
@@ -694,7 +694,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Paid cabin upgrades such as extra legroom seats over $50 are personal expenses and will not be reimbursed under Clause §1.4.",
+      "reason": "Paid cabin upgrades such as Economy Plus and extra legroom seats over $50 are considered personal expenses under §1.4.",
       "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
       "retrieved_clauses": [
         "§1.4",
@@ -714,7 +714,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Travel, lodging, and meal expenses for spouses are strictly non-reimbursable under Clause §4.4.",
+      "reason": "Travel, lodging, and meal expenses for spouses are strictly non-reimbursable under §4.4.",
       "policy_excerpt": "Travel, lodging, and meal expenses for spouses, family members, or traveling companions who are not active company employees on official business are strictly non-reimbursable.",
       "retrieved_clauses": [
         "§4.4",
@@ -731,11 +731,11 @@
         "§2.3"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The claim is rejected because SUV rentals require prior VP approval under Clause §2.3.",
-      "policy_excerpt": "When rental cars are required, reservations must be made for Compact or Intermediate/Mid-Size vehicles only. SUV, Luxury, or Sports car rentals are non-reimbursable without prior VP approval.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 95,
+      "reason": "The SUV rental requires prior VP approval as specified in §2.3, though weather/road conditions provide a justified exception for review.",
+      "policy_excerpt": "SUV, Luxury, or Sports car rentals are non-reimbursable without prior VP approval.",
       "retrieved_clauses": [
         "§2.3",
         "§2.1",
@@ -754,7 +754,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "The claim totals $280.00, which exceeds the annual limit of $200.00 USD per calendar year for home office peripherals under Clause §6.1.",
+      "reason": "The claim exceeds the annual limit of $200.00 USD for home office peripherals under §6.1.",
       "policy_excerpt": "Remote employees may claim essential home office peripherals (e.g., monitor, mouse, keyboard, ergonomic chair) up to an annual limit of $200.00 USD per calendar year.",
       "retrieved_clauses": [
         "§6.1",
@@ -772,10 +772,10 @@
         "§1.4"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The claim must be rejected because paid cabin upgrades such as extra legroom seats over $50 are strictly personal expenses under Clause §1.4.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 90,
+      "reason": "Paid cabin upgrades over $50 for extra legroom seats require human review despite the attached medical note under §1.4.",
       "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
       "retrieved_clauses": [
         "§1.4",
@@ -792,10 +792,10 @@
         "§2.4"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "Valet parking charges are strictly non-reimbursable under Clause §2.4.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 90,
+      "reason": "Valet parking is generally non-reimbursable, but this claim is flagged for review due to the documented emergency exception that all long-term economy surface lots were at 100% capacity under §2.4.",
       "policy_excerpt": "Valet parking and premium short-term terminal parking charges are non-reimbursable.",
       "retrieved_clauses": [
         "§2.4",
@@ -815,7 +815,7 @@
       "actual_decision": "rejected",
       "is_correct": true,
       "confidence_score": 100,
-      "reason": "Hotel mini-bar snacks and beverages are non-reimbursable personal expenses under clause §4.2.",
+      "reason": "Hotel mini-bar snacks and beverages are explicitly classified as non-reimbursable personal expenses under §4.2.",
       "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
       "retrieved_clauses": [
         "§4.2",
@@ -832,10 +832,10 @@
         "§3.2"
       ],
       "expected_decision": "flagged",
-      "actual_decision": "rejected",
-      "is_correct": false,
-      "confidence_score": 100,
-      "reason": "The dinner expense of $48.00 exceeds the individual meal limit of $40.00 for dinner under Clause §3.2 by more than 1.5x.",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "confidence_score": 95,
+      "reason": "The dinner expense of $48.00 exceeds the individual meal cap of $40.00 under §3.2, but it is within 1.5x of the cap and thus requires review.",
       "policy_excerpt": "Individual meals during single-day travel or non-overnight trips are capped as follows: Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00).",
       "retrieved_clauses": [
         "§3.2",
@@ -852,10 +852,10 @@
         "§6.3"
       ],
       "expected_decision": "approved",
-      "actual_decision": "approved",
-      "is_correct": true,
-      "confidence_score": 100,
-      "reason": "Expedited courier shipping exceeding $40.00 is permitted as it includes the required written justification for business urgency per Clause §6.3.",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "confidence_score": 95,
+      "reason": "Expedited courier shipping exceeding $40.00 requires written justification stating the business urgency under §6.3.",
       "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
       "retrieved_clauses": [
         "§6.3",
