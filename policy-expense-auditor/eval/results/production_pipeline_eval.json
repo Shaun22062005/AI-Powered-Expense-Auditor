@@ -1,0 +1,2100 @@
+{
+  "timestamp": "2026-09-08T17:04:33.228Z",
+  "benchmark_metadata": {
+    "dataset_size": 40,
+    "query_format": "${category} | at ${merchant} | Purpose: ${purpose} | Amount: ${amount} ${currency}",
+    "retrieval_architecture": "Qdrant Top-10 -> Gemini Cross-Encoder Reranker -> Top-3",
+    "decision_architecture": "Gemini 3.5 Flash with Generalized Domain-Level Audit Prompt",
+    "qdrant_collection": "policies_eval_boundary",
+    "fallback_activation_rate": 0
+  },
+  "retrieval_metrics": {
+    "macro_recall_at_3": 1,
+    "macro_precision_at_3": 0.37500000000000006,
+    "macro_mrr": 1,
+    "subgroups": {
+      "easy": {
+        "count": 9,
+        "recall": 1,
+        "mrr": 1
+      },
+      "medium": {
+        "count": 18,
+        "recall": 1,
+        "mrr": 1
+      },
+      "hard": {
+        "count": 13,
+        "recall": 1,
+        "mrr": 1
+      }
+    }
+  },
+  "decision_metrics": {
+    "overall_accuracy": 0.85,
+    "confusion_matrix": {
+      "approved": {
+        "approved": 9,
+        "flagged": 3,
+        "rejected": 1
+      },
+      "flagged": {
+        "approved": 0,
+        "flagged": 11,
+        "rejected": 1
+      },
+      "rejected": {
+        "approved": 0,
+        "flagged": 1,
+        "rejected": 14
+      }
+    },
+    "class_metrics": {
+      "approved": {
+        "support": 13,
+        "true_positives": 9,
+        "false_positives": 0,
+        "false_negatives": 4,
+        "precision": 1,
+        "recall": 0.6923076923076923,
+        "f1_score": 0.8181818181818181
+      },
+      "flagged": {
+        "support": 12,
+        "true_positives": 11,
+        "false_positives": 4,
+        "false_negatives": 1,
+        "precision": 0.7333333333333333,
+        "recall": 0.9166666666666666,
+        "f1_score": 0.8148148148148148
+      },
+      "rejected": {
+        "support": 15,
+        "true_positives": 14,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "precision": 0.875,
+        "recall": 0.9333333333333333,
+        "f1_score": 0.9032258064516129
+      }
+    },
+    "compliance_risk": {
+      "prohibited_violations_count": 15,
+      "rejected_recall": 0.9333333333333333,
+      "false_approvals_count": 0,
+      "compliance_leakage_rate": 0
+    }
+  },
+  "queries": [
+    {
+      "id": "TC-001",
+      "query": "Hailed a standard yellow cab from Chicago O'Hare terminal to the downtown hotel where the regional sales summit is being hosted.",
+      "production_query_text": "Ground Transportation | Purpose: Hailed a standard yellow cab from Chicago O'Hare terminal to the downtown hotel where the regional sales summit is being hosted. | Amount: 38.5 USD",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.3",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.7176849,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§2.3",
+            "dense_score": 0.645036,
+            "rerank_score": 0.015
+          },
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.6433772,
+            "rerank_score": 0.01
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The taxi expense of $38.50 for travel between the airport and lodging is fully compliant as it is below the $50.00 maximum limit specified in §2.1.",
+        "policy_excerpt": "Taxis, rideshares (Uber, Lyft standard / comfort), and public transit incurred directly for business travel between airports, lodging, and client/work sites are reimbursable up to a maximum of $50.00 per single one-way trip.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-002",
+      "query": "Booked roundtrip basic coach airfare on Delta from Boston to Atlanta for the Q3 operations review meeting three weeks before the flight.",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Booked roundtrip basic coach airfare on Delta from Boston to Atlanta for the Q3 operations review meeting three weeks before the flight. | Amount: 320 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.1",
+          "§1.2",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.72256684,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§1.2",
+            "dense_score": 0.7034277,
+            "rerank_score": 0.89
+          },
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.66242844,
+            "rerank_score": 0.82
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The flight was booked in basic coach class and reserved three weeks in advance, fully complying with the economy class standard (§1.1) and the 14-day advance booking requirement (§1.2).",
+        "policy_excerpt": "All domestic and short-haul international flights (under 6 hours in duration) must be booked in standard Economy / Coach class.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-003",
+      "query": "Grabbed a quick breakfast sandwich and coffee at Starbucks during a one-day trip to our Hartford warehouse location.",
+      "production_query_text": "Meals & Business Dining | Purpose: Grabbed a quick breakfast sandwich and coffee at Starbucks during a one-day trip to our Hartford warehouse location. | Amount: 13.25 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§3.1",
+          "§3.3"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.7319733,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.67795366,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.6857022,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The breakfast expense of $13.25 is within the $15.00 limit for single-day travel under §3.2.",
+        "policy_excerpt": "Individual meals during single-day travel or non-overnight trips are capped as follows: Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00).",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-004",
+      "query": "Purchased an ergonomic wireless split keyboard and vertical mouse for my daily remote engineering workstation.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Purchased an ergonomic wireless split keyboard and vertical mouse for my daily remote engineering workstation. | Amount: 145 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§6.2",
+          "§5.3"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.794637,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.6814511,
+            "rerank_score": 0.25
+          },
+          {
+            "clause_id": "§5.3",
+            "dense_score": 0.67328364,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The expense for home office peripherals lacks the mandatory prior written approval from the direct manager required under §6.1.",
+        "policy_excerpt": "All hardware purchases require prior written approval from the direct manager prior to purchasing.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-005",
+      "query": "Paid for high-speed in-room Wi-Fi connection for 3 nights at the Marriott during a business visit to the Dallas client office.",
+      "production_query_text": "Hotel & Lodging | Purpose: Paid for high-speed in-room Wi-Fi connection for 3 nights at the Marriott during a business visit to the Dallas client office. | Amount: 45 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§4.2",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.75999177,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.68471694,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.70656216,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The expense for high-speed in-room Wi-Fi is fully compliant as it does not exceed the daily cap of $15.00/day specified in §5.2.",
+        "policy_excerpt": "High-speed in-room internet access is reimbursable up to $15.00/day if not provided complimentary by the hotel.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-006",
+      "query": "Parked in the airport economy long-term surface lot for 4 days while attending the annual tech conference in Las Vegas.",
+      "production_query_text": "Ground Transportation | Purpose: Parked in the airport economy long-term surface lot for 4 days while attending the annual tech conference in Las Vegas. | Amount: 100 USD",
+      "category": "Ground Transportation",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§4.3",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.4",
+            "dense_score": 0.766533,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§4.3",
+            "dense_score": 0.6480719,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.65191543,
+            "rerank_score": 0.08
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The expense is approved as the airport economy long-term parking rate of $25.00 per day for 4 days is within the $30.00 daily cap specified in §2.4.",
+        "policy_excerpt": "Airport parking is reimbursable only for economy / long-term parking lots up to a maximum daily cap of $30.00 per day.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-007",
+      "query": "Submitted a receipt for a double IPA craft beer ordered at the hotel lobby bar after the client dinner concluded.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Submitted a receipt for a double IPA craft beer ordered at the hotel lobby bar after the client dinner concluded. | Amount: 14 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.1",
+          "§3.3",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.1",
+            "dense_score": 0.81443655,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.72602594,
+            "rerank_score": 0.52
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.7505187,
+            "rerank_score": 0.45
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The claim is for an alcoholic beverage (double IPA craft beer), which violates the strict zero-tolerance policy on alcohol reimbursement under §4.1.",
+        "policy_excerpt": "The company maintains a strict zero-tolerance policy regarding alcohol reimbursement. Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-008",
+      "query": "Reimbursing a municipal parking meter ticket received while parked outside the customer site during an afternoon meeting.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Reimbursing a municipal parking meter ticket received while parked outside the customer site during an afternoon meeting. | Amount: 65 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.3"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.3",
+          "§2.1",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§4.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.3",
+            "dense_score": 0.80772924,
+            "rerank_score": 1
+          },
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.70203507,
+            "rerank_score": 0.1
+          },
+          {
+            "clause_id": "§2.4",
+            "dense_score": 0.73289406,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "Parking tickets and fines incurred during business travel are explicitly prohibited and are the employee's sole financial responsibility per §4.3.",
+        "policy_excerpt": "Any moving violations, speeding tickets, parking fines, toll violations, or vehicle towing fees incurred during business travel are the sole legal and financial responsibility of the employee and will be rejected with zero exceptions.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-009",
+      "query": "Purchased an in-flight movie and watched pay-per-view films in the hotel room after work hours.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Purchased an in-flight movie and watched pay-per-view films in the hotel room after work hours. | Amount: 28 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "easy",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§1.4",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.8329124,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.6871827,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.6800925,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "Hotel pay-per-view movies and in-flight entertainment fees are explicitly classified as non-reimbursable personal expenses under §4.2.",
+        "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-010",
+      "query": "Booked an urgent one-way plane ticket 4 days before traveling to fix a critical production outage at our Phoenix data center.",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Booked an urgent one-way plane ticket 4 days before traveling to fix a critical production outage at our Phoenix data center. | Amount: 480 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.2",
+          "§1.1",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§1.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.2",
+            "dense_score": 0.7002109,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.6992346,
+            "rerank_score": 0.25
+          },
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.654704,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The flight was booked 4 days prior to departure without attaching the required written Director-level approval under §1.2.",
+        "policy_excerpt": "Flights booked within 14 days of departure require written Director-level approval attached to the claim; otherwise, the claim will be flagged for review.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-011",
+      "query": "Reserved an Uber Black premium sedan from the airport to the hotel because regular rides had long queues.",
+      "production_query_text": "Ground Transportation | Purpose: Reserved an Uber Black premium sedan from the airport to the hotel because regular rides had long queues. | Amount: 78 USD",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.4",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.71616876,
+            "rerank_score": 1
+          },
+          {
+            "clause_id": "§2.4",
+            "dense_score": 0.66772354,
+            "rerank_score": 0
+          },
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.6660675,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The expense is rejected under §2.1 because luxury rideshare tiers such as Uber Black are strictly non-reimbursable.",
+        "policy_excerpt": "Luxury rideshare tiers (Uber Black, Lyft Lux) are strictly non-reimbursable.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-012",
+      "query": "Drove my personal Honda Civic 180 miles roundtrip to deliver backup hardware to a customer branch site.",
+      "production_query_text": "Ground Transportation | Purpose: Drove my personal Honda Civic 180 miles roundtrip to deliver backup hardware to a customer branch site. | Amount: 120.6 USD",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§6.3"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.74460316,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.73136353,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§6.3",
+            "dense_score": 0.65928847,
+            "rerank_score": 0.02
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The mileage reimbursement claim of $120.60 for a 180-mile business trip to a customer site is fully compliant with the standard corporate rate of $0.67 per mile under §2.2.",
+        "policy_excerpt": "Employees using personal vehicles for approved business travel may claim mileage at the standard corporate rate of $0.67 per mile.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-013",
+      "query": "Claimed 25 miles per day for my daily drive between my home in Jersey City and the company HQ office in Manhattan.",
+      "production_query_text": "Ground Transportation | Purpose: Claimed 25 miles per day for my daily drive between my home in Jersey City and the company HQ office in Manhattan. | Amount: 167.5 USD",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.2",
+          "§2.1",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§2.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.7744087,
+            "rerank_score": 1
+          },
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.7396187,
+            "rerank_score": 0
+          },
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.6980475,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The expense claim for daily commuting between the employee's home and the primary office is strictly prohibited under §2.2.",
+        "policy_excerpt": "Daily commuting between an employee's residence and their designated primary office is not eligible for reimbursement under any circumstance.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-014",
+      "query": "Stayed 2 nights at the Hyatt Regency in downtown San Francisco at a nightly room rate of $240 before taxes for a partner summit.",
+      "production_query_text": "Hotel & Lodging | Purpose: Stayed 2 nights at the Hyatt Regency in downtown San Francisco at a nightly room rate of $240 before taxes for a partner summit. | Amount: 480 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§3.3",
+          "§4.4"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.72414136,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.6552497,
+            "rerank_score": 0.25
+          },
+          {
+            "clause_id": "§4.4",
+            "dense_score": 0.6474968,
+            "rerank_score": 0.2
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The nightly room rate of $240.00 in San Francisco is within the $250.00 cap for Tier 1 metropolitan cities as specified in §5.1.",
+        "policy_excerpt": "Nightly room rates are capped at $250.00/night (before local taxes) in designated Tier 1 metropolitan cities (NYC, SF, London, Tokyo, Zurich) and $180.00/night in all other locations.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-015",
+      "query": "Booked a standard hotel room in Cleveland for 2 nights at $235 per night due to an ongoing medical convention.",
+      "production_query_text": "Hotel & Lodging | Purpose: Booked a standard hotel room in Cleveland for 2 nights at $235 per night due to an ongoing medical convention. | Amount: 470 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.1",
+          "§5.2",
+          "§5.3"
+        ],
+        "hit_clauses": [
+          "§5.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.708732,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.67413116,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§5.3",
+            "dense_score": 0.6330894,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The nightly room rate of $235.00 in Cleveland exceeds the $180.00 cap by more than 20% without prior approval, violating §5.1.",
+        "policy_excerpt": "Rates exceeding these caps by up to 20% due to peak city events will be flagged for review; rates exceeding 20% without prior approval will be rejected.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-016",
+      "query": "Hosted a business dinner for 4 people (myself + 3 Acme Corp client stakeholders); total meal was $360 including tax and 18% tip.",
+      "production_query_text": "Meals & Business Dining | Purpose: Hosted a business dinner for 4 people (myself + 3 Acme Corp client stakeholders); total meal was $360 including tax and 18% tip. | Amount: 360 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "rejected",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.3",
+          "§3.2",
+          "§3.1"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.7877541,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.7164055,
+            "rerank_score": 0.4
+          },
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.7279874,
+            "rerank_score": 0.35
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The claimed amount of $360 for 4 people equals $90 per person, which is within the $100 per person cap (§3.3), but the total claim exceeds 1.5x the standard individual per diem daily cap framework or represents an unapproved group aggregate exceeding standard limits without itemized proof.",
+        "policy_excerpt": "Meals hosted with external clients, partners, or prospective accounts are reimbursable up to a maximum of $100.00 USD per person (including host).",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-017",
+      "query": "Dinner with 2 prospective partners to review vendor RFP responses; invoice came to $340 for the 3 of us.",
+      "production_query_text": "Meals & Business Dining | Purpose: Dinner with 2 prospective partners to review vendor RFP responses; invoice came to $340 for the 3 of us. | Amount: 340 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.3",
+          "§3.4",
+          "§3.2"
+        ],
+        "hit_clauses": [
+          "§3.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.77893627,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.4",
+            "dense_score": 0.7497256,
+            "rerank_score": 0.21
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.7383461,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The expense lacks the required complete list of attendees with their company affiliations and business discussion topic as mandated by §3.3.",
+        "policy_excerpt": "All client entertainment claims must include an itemized receipt and a complete list of attendees with their company affiliations and business discussion topic.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-018",
+      "query": "Full day meals during overnight travel in Denver: Breakfast ($18), Lunch ($24), and Dinner ($45), totaling $87.",
+      "production_query_text": "Meals & Business Dining | Purpose: Full day meals during overnight travel in Denver: Breakfast ($18), Lunch ($24), and Dinner ($45), totaling $87. | Amount: 87 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.1",
+          "§3.2",
+          "§3.4"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.7786073,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.78099084,
+            "rerank_score": 0.35
+          },
+          {
+            "clause_id": "§3.4",
+            "dense_score": 0.684384,
+            "rerank_score": 0.2
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The daily meal expense of $87.00 exceeds the $75.00 daily per diem cap for overnight travel but is below the $112.50 rejection threshold under §3.1.",
+        "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-019",
+      "query": "Combined food total for a single day of travel came to $125 across room service and lunch.",
+      "production_query_text": "Meals & Business Dining | Purpose: Combined food total for a single day of travel came to $125 across room service and lunch. | Amount: 125 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§3.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.1",
+          "§3.2",
+          "§3.3"
+        ],
+        "hit_clauses": [
+          "§3.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.7552878,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.75612354,
+            "rerank_score": 0.25
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.7079471,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The daily meal expense of $125.00 exceeds the maximum allowable limit of $112.50 (1.5x the $75.00 per diem cap) under §3.1.",
+        "policy_excerpt": "Daily meal expenses exceeding $75.00 will be flagged, and any portion exceeding 1.5x ($112.50) will be rejected.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-020",
+      "query": "Paid for the rental car company's prepaid full tank of gas option and supplementary liability insurance at counter check-in.",
+      "production_query_text": "Ground Transportation | Purpose: Paid for the rental car company's prepaid full tank of gas option and supplementary liability insurance at counter check-in. | Amount: 95 USD",
+      "category": "Ground Transportation",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§2.1",
+          "§1.4"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.3",
+            "dense_score": 0.7190865,
+            "rerank_score": 1
+          },
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.6765733,
+            "rerank_score": 0
+          },
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.67004704,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The expense is rejected because prepaid fuel options and optional rental insurance are strictly non-reimbursable under §2.3.",
+        "policy_excerpt": "Prepaid fuel options and optional rental insurance (covered by corporate credit card policy) will be rejected.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-021",
+      "query": "Hotel dry cleaning and laundry service bill incurred on the 6th day of an 8-day multi-city training roadshow.",
+      "production_query_text": "Hotel & Lodging | Purpose: Hotel dry cleaning and laundry service bill incurred on the 6th day of an 8-day multi-city training roadshow. | Amount: 42 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§4.2",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.76128596,
+            "rerank_score": 1
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.6922362,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.7071267,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The laundry expense is fully reimbursable under Clause §5.2 because the business trip lasted eight days, which exceeds the five consecutive business days requirement.",
+        "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-022",
+      "query": "Submitted a 2-day business trip hotel laundry invoice for shirt pressing before an executive breakfast.",
+      "production_query_text": "Hotel & Lodging | Purpose: Submitted a 2-day business trip hotel laundry invoice for shirt pressing before an executive breakfast. | Amount: 35 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.2",
+          "§4.2",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§5.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.7505355,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.6668668,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.70223457,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The laundry expense is rejected because the business trip lasted only two days, violating the requirement in §5.2 that laundry services are only reimbursable for trips lasting five consecutive business days or longer.",
+        "policy_excerpt": "Laundry and dry cleaning services are reimbursable only for business trips lasting five (5) consecutive business days or longer.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-023",
+      "query": "Monthly subscription for GitHub Copilot Pro and JetBrains IDE tools utilized for daily software development tasks.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Monthly subscription for GitHub Copilot Pro and JetBrains IDE tools utilized for daily software development tasks. | Amount: 39 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§6.1",
+          "§6.3"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.73847026,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.69833606,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§6.3",
+            "dense_score": 0.6517217,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The software subscription expense lacks the mandatory prior approval from the IT Department as required by §6.2.",
+        "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool. Unapproved software charges will be flagged.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-024",
+      "query": "Monthly enterprise workspace AI assistant subscription claimed without submitting IT security approval ticket.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Monthly enterprise workspace AI assistant subscription claimed without submitting IT security approval ticket. | Amount: 80 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.2",
+          "§6.1",
+          "§5.3"
+        ],
+        "hit_clauses": [
+          "§6.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.7713959,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.71136796,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§5.3",
+            "dense_score": 0.6898868,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The software subscription lacks prior IT Department approval and exceeds the $50.00 monthly cap per individual tool under §6.2.",
+        "policy_excerpt": "Software subscriptions, cloud services, and AI developer tools required for business workflows require approval from the IT Department and are capped at $50.00/month per individual tool. Unapproved software charges will be flagged.",
+        "confidence_score": 98
+      }
+    },
+    {
+      "id": "TC-025",
+      "query": "Overnight expedited courier delivery of signed commercial contracts to counterparty counsel before the fiscal deadline.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Overnight expedited courier delivery of signed commercial contracts to counterparty counsel before the fiscal deadline. | Amount: 32 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "approved",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§6.1",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.3",
+            "dense_score": 0.7786076,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.69822705,
+            "rerank_score": 0.01
+          },
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.69788516,
+            "rerank_score": 0.01
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "approved",
+        "reason": "The expedited courier expense of $32.00 is fully reimbursable without written justification since it does not exceed the $40.00 threshold specified in §6.3.",
+        "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-026",
+      "query": "Upgraded domestic flight from Seattle to San Francisco to First Class out of personal pocket and submitted full ticket.",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Upgraded domestic flight from Seattle to San Francisco to First Class out of personal pocket and submitted full ticket. | Amount: 620 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§1.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.72739947,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.69756615,
+            "rerank_score": 0.82
+          },
+          {
+            "clause_id": "§1.2",
+            "dense_score": 0.6656171,
+            "rerank_score": 0.35
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The claim is rejected because First Class upgrades are considered personal expenses and are not reimbursable under §1.4.",
+        "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-027",
+      "query": "Missed the hotel cancellation deadline by 2 hours due to a delayed client meeting, incurring a one-night room penalty charge.",
+      "production_query_text": "Hotel & Lodging | Purpose: Missed the hotel cancellation deadline by 2 hours due to a delayed client meeting, incurring a one-night room penalty charge. | Amount: 210 USD",
+      "category": "Hotel & Lodging",
+      "difficulty": "medium",
+      "expected_clause_ids": [
+        "§5.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§5.3",
+          "§5.1",
+          "§5.2"
+        ],
+        "hit_clauses": [
+          "§5.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§5.3",
+            "dense_score": 0.72628605,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.6838685,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§5.2",
+            "dense_score": 0.6618109,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The late cancellation fee is flagged for review to verify written documentation of the unavoidable business emergency (delayed client meeting) as required by §5.3.",
+        "policy_excerpt": "No-show penalties and late cancellation fees will be rejected unless caused by an unavoidable business emergency documented in writing.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-028",
+      "query": "Team celebratory dinner with 5 colleagues after product launch; we split the $500 total check onto two employee cards ($250 each).",
+      "production_query_text": "Meals & Business Dining | Purpose: Team celebratory dinner with 5 colleagues after product launch; we split the $500 total check onto two employee cards ($250 each). | Amount: 250 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.4",
+          "§3.3",
+          "§3.2"
+        ],
+        "hit_clauses": [
+          "§3.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.4",
+            "dense_score": 0.7402947,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.7334773,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.6951312,
+            "rerank_score": 0.08
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "Splitting a group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited under §3.4.",
+        "policy_excerpt": "Splitting a single group bill across multiple employee expense claims to circumvent individual limits is strictly prohibited.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-029",
+      "query": "Hosted 2 VP clients for dinner ($180 total food), but the receipt includes an itemized $65 Cabernet Sauvignon wine bottle.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Hosted 2 VP clients for dinner ($180 total food), but the receipt includes an itemized $65 Cabernet Sauvignon wine bottle. | Amount: 245 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.3",
+        "§4.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.1",
+          "§3.3",
+          "§3.4"
+        ],
+        "hit_clauses": [
+          "§3.3",
+          "§4.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.1",
+            "dense_score": 0.7914911,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.7659321,
+            "rerank_score": 0.45
+          },
+          {
+            "clause_id": "§3.4",
+            "dense_score": 0.7624098,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The expense includes an itemized wine purchase, which violates the strict zero-tolerance prohibition on alcohol reimbursement under §4.1.",
+        "policy_excerpt": "Any claim containing beer, wine, liquor, cocktails, or any alcoholic beverage charge will be automatically rejected.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-030",
+      "query": "Took a 45-mile Uber from Dulles Airport during an intense snowstorm; surge pricing pushed the fare to $84.",
+      "production_query_text": "Ground Transportation | Purpose: Took a 45-mile Uber from Dulles Airport during an intense snowstorm; surge pricing pushed the fare to $84. | Amount: 84 USD",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.1"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.1",
+          "§2.2",
+          "§2.4"
+        ],
+        "hit_clauses": [
+          "§2.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.71471393,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.6279478,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§2.4",
+            "dense_score": 0.6598323,
+            "rerank_score": 0
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The rideshare trip exceeded the $50.00 cap due to surge pricing, which requires human-in-the-loop review and a documented business reason per §2.1.",
+        "policy_excerpt": "Rideshare trips exceeding $50.00 require a business reason detailing distance or surge pricing.",
+        "confidence_score": 98
+      }
+    },
+    {
+      "id": "TC-031",
+      "query": "Booked flight from London to New York 8 weeks in advance in standard economy, but did not request VP approval beforehand.",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Booked flight from London to New York 8 weeks in advance in standard economy, but did not request VP approval beforehand. | Amount: 710 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.3",
+          "§1.1",
+          "§1.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.3",
+            "dense_score": 0.70862216,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.72403145,
+            "rerank_score": 0.85
+          },
+          {
+            "clause_id": "§1.2",
+            "dense_score": 0.7338282,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The international flight was submitted without prior written authorization from the Department Vice President as required by §1.3.",
+        "policy_excerpt": "All international travel requires prior written authorization from the Department Vice President at least 30 days prior to departure. Any international trip submitted without pre-authorization documentation will be flagged for management review.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-032",
+      "query": "Paid an $85 Economy Plus extra-legroom upgrade fee on a 5-hour domestic flight to ensure workspace for drafting an urgent client RFP.",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Paid an $85 Economy Plus extra-legroom upgrade fee on a 5-hour domestic flight to ensure workspace for drafting an urgent client RFP. | Amount: 85 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§1.2"
+        ],
+        "hit_clauses": [
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.77126455,
+            "rerank_score": 0.98
+          },
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.7303977,
+            "rerank_score": 0.45
+          },
+          {
+            "clause_id": "§1.2",
+            "dense_score": 0.6770813,
+            "rerank_score": 0.1
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The claimed $85 Economy Plus extra-legroom upgrade fee is explicitly classified as a personal expense under Clause §1.4.",
+        "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-033",
+      "query": "Spouse accompanied me on a 4-day executive conference in Miami; submitted additional meal and hotel supplement charges.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Spouse accompanied me on a 4-day executive conference in Miami; submitted additional meal and hotel supplement charges. | Amount: 340 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.4"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.4",
+          "§4.1",
+          "§5.1"
+        ],
+        "hit_clauses": [
+          "§4.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.4",
+            "dense_score": 0.76240706,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§4.1",
+            "dense_score": 0.76759976,
+            "rerank_score": 0.85
+          },
+          {
+            "clause_id": "§5.1",
+            "dense_score": 0.70068276,
+            "rerank_score": 0.6
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "Travel, lodging, and meal expenses for spouses or companions who are not active company employees are strictly non-reimbursable under §4.4.",
+        "policy_excerpt": "Travel, lodging, and meal expenses for spouses, family members, or traveling companions who are not active company employees on official business are strictly non-reimbursable.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-034",
+      "query": "Rented a Premium Full-Size SUV in Denver because mountain road weather required 4-wheel drive to reach the client facility.",
+      "production_query_text": "Ground Transportation | Purpose: Rented a Premium Full-Size SUV in Denver because mountain road weather required 4-wheel drive to reach the client facility. | Amount: 165 USD",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.3"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.3",
+          "§2.1",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§2.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.3",
+            "dense_score": 0.7198427,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§2.1",
+            "dense_score": 0.7107457,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.6721293,
+            "rerank_score": 0.04
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The rental of an SUV requires prior VP approval per §2.3, though exigent circumstances for mountain road weather allow for conditional managerial review.",
+        "policy_excerpt": "SUV, Luxury, or Sports car rentals are non-reimbursable without prior VP approval.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-035",
+      "query": "Purchased a 4K external display ($170) and a standing desk riser ($110) for remote work, totaling $280 for the year.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Purchased a 4K external display ($170) and a standing desk riser ($110) for remote work, totaling $280 for the year. | Amount: 280 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.1"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.1",
+          "§6.2",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§6.1"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.7839989,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.6998028,
+            "rerank_score": 0.15
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.620929,
+            "rerank_score": 0.05
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The claim exceeds the annual limit of $200.00 USD and lacks documented prior written approval from the direct manager pursuant to §6.1.",
+        "policy_excerpt": "Remote employees may claim essential home office peripherals (e.g., monitor, mouse, keyboard, ergonomic chair) up to an annual limit of $200.00 USD per calendar year. All hardware purchases require prior written approval from the direct manager prior to purchasing.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-036",
+      "query": "Paid a $50 extra legroom seat selection charge on a 4-hour flight due to a recent knee injury (medical note attached).",
+      "production_query_text": "Airfare & Flight Travel | Purpose: Paid a $50 extra legroom seat selection charge on a 4-hour flight due to a recent knee injury (medical note attached). | Amount: 50 USD",
+      "category": "Airfare & Flight Travel",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§1.1",
+        "§1.4"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§1.4",
+          "§1.1",
+          "§4.2"
+        ],
+        "hit_clauses": [
+          "§1.1",
+          "§1.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.6666666666666666,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§1.4",
+            "dense_score": 0.7607183,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§1.1",
+            "dense_score": 0.704932,
+            "rerank_score": 0.25
+          },
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.63670427,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The extra legroom seat charge exceeds the $50 threshold and involves a medical condition requiring human-in-the-loop review per §1.4.",
+        "policy_excerpt": "Paid cabin upgrades (e.g., extra legroom seats over $50, Economy Plus, First Class upgrades, or auction bidding upgrades) are personal expenses and will not be reimbursed by the company.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-037",
+      "query": "Used airport terminal valet parking for 3 days ($105 total) because all long-term economy surface lots were at 100% capacity upon arrival.",
+      "production_query_text": "Ground Transportation | Purpose: Used airport terminal valet parking for 3 days ($105 total) because all long-term economy surface lots were at 100% capacity upon arrival. | Amount: 105 USD",
+      "category": "Ground Transportation",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§2.4"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§2.4",
+          "§4.3",
+          "§2.2"
+        ],
+        "hit_clauses": [
+          "§2.4"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§2.4",
+            "dense_score": 0.7516008,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§4.3",
+            "dense_score": 0.622421,
+            "rerank_score": 0.35
+          },
+          {
+            "clause_id": "§2.2",
+            "dense_score": 0.6407401,
+            "rerank_score": 0.02
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "Valet parking was used instead of economy long-term parking, but it was incurred due to exigent circumstances (lots at 100% capacity), making it subject to conditional managerial review under §2.4.",
+        "policy_excerpt": "Valet parking and premium short-term terminal parking charges are non-reimbursable.",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-038",
+      "query": "Ordered mini-bar water bottles, chocolate, and energy drinks from the hotel room during late-night proposal preparation.",
+      "production_query_text": "Alcohol & Prohibited Expenses | Purpose: Ordered mini-bar water bottles, chocolate, and energy drinks from the hotel room during late-night proposal preparation. | Amount: 42 USD",
+      "category": "Alcohol & Prohibited Expenses",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§4.2"
+      ],
+      "expected_decision": "rejected",
+      "actual_decision": "rejected",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§4.2",
+          "§3.1",
+          "§3.2"
+        ],
+        "hit_clauses": [
+          "§4.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§4.2",
+            "dense_score": 0.79553723,
+            "rerank_score": 0.985
+          },
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.6618798,
+            "rerank_score": 0.6
+          },
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.6666281,
+            "rerank_score": 0.35
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "rejected",
+        "reason": "The claim is for hotel mini-bar snacks and beverages, which are explicitly listed as non-reimbursable personal expenses under §4.2.",
+        "policy_excerpt": "Hotel pay-per-view movies, fitness/spa services, hotel mini-bar snacks/beverages, in-flight streaming/entertainment fees, and personal sightseeing tours are non-reimbursable personal expenses.",
+        "confidence_score": 100
+      }
+    },
+    {
+      "id": "TC-039",
+      "query": "Dinner for single traveler during transit in Frankfurt; bill converted to $48 USD for a schnitzel and soft beverage.",
+      "production_query_text": "Meals & Business Dining | Purpose: Dinner for single traveler during transit in Frankfurt; bill converted to $48 USD for a schnitzel and soft beverage. | Amount: 48 USD",
+      "category": "Meals & Business Dining",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§3.2"
+      ],
+      "expected_decision": "flagged",
+      "actual_decision": "flagged",
+      "is_correct": true,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§3.2",
+          "§3.1",
+          "§3.3"
+        ],
+        "hit_clauses": [
+          "§3.2"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§3.2",
+            "dense_score": 0.74681056,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§3.1",
+            "dense_score": 0.72328454,
+            "rerank_score": 0.7
+          },
+          {
+            "clause_id": "§3.3",
+            "dense_score": 0.72583973,
+            "rerank_score": 0.15
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "The individual dinner expense of $48.00 exceeds the single meal cap of $40.00 for non-overnight single-day travel or general individual meal limits under §3.2, requiring managerial review.",
+        "policy_excerpt": "Individual meals during single-day travel or non-overnight trips are capped as follows: Breakfast ($15.00), Lunch ($20.00), and Dinner ($40.00).",
+        "confidence_score": 95
+      }
+    },
+    {
+      "id": "TC-040",
+      "query": "Overnighted critical legal deposition documents to federal court via courier, costing $65 with urgent courier receipt attached.",
+      "production_query_text": "Remote Office Supplies & Software | Purpose: Overnighted critical legal deposition documents to federal court via courier, costing $65 with urgent courier receipt attached. | Amount: 65 USD",
+      "category": "Remote Office Supplies & Software",
+      "difficulty": "hard",
+      "expected_clause_ids": [
+        "§6.3"
+      ],
+      "expected_decision": "approved",
+      "actual_decision": "flagged",
+      "is_correct": false,
+      "retrieval": {
+        "retrieved_clauses": [
+          "§6.3",
+          "§6.1",
+          "§6.2"
+        ],
+        "hit_clauses": [
+          "§6.3"
+        ],
+        "recall_at_3": 1,
+        "precision_at_3": 0.3333333333333333,
+        "mrr": 1,
+        "fallback_triggered": false,
+        "top_candidates": [
+          {
+            "clause_id": "§6.3",
+            "dense_score": 0.77186346,
+            "rerank_score": 0.95
+          },
+          {
+            "clause_id": "§6.1",
+            "dense_score": 0.7060887,
+            "rerank_score": 0.05
+          },
+          {
+            "clause_id": "§6.2",
+            "dense_score": 0.6788476,
+            "rerank_score": 0.02
+          }
+        ]
+      },
+      "audit_verdict": {
+        "status": "flagged",
+        "reason": "Expedited courier shipping exceeds $40.00 and requires written justification stating the business urgency under §6.3.",
+        "policy_excerpt": "Expedited overnight or courier shipping exceeding $40.00 requires written justification stating the business urgency.",
+        "confidence_score": 95
+      }
+    }
+  ]
+}

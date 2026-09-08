@@ -1,8 +1,10 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
 import { OCR_SYSTEM_PROMPT, AUDIT_PROMPT } from './prompts';
 
-const apiKey = process.env.GEMINI_API_KEY!;
-const genAI = new GoogleGenerativeAI(apiKey);
+function getGenAI() {
+  const apiKey = process.env.GEMINI_API_KEY || '';
+  return new GoogleGenerativeAI(apiKey);
+}
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -37,7 +39,7 @@ export async function extractReceiptData(imageBuffer: Buffer, mimeType: string, 
   for (let attempt = 0; attempt < retries; attempt++) {
     const modelName = models[attempt % models.length];
     try {
-      const model = genAI.getGenerativeModel({
+      const model = getGenAI().getGenerativeModel({
         model: modelName,
         generationConfig: {
           responseMimeType: 'application/json',
@@ -84,7 +86,7 @@ Audit this expense claim against the policy context provided.
   for (let attempt = 0; attempt < retries; attempt++) {
     const modelName = models[attempt % models.length];
     try {
-      const model = genAI.getGenerativeModel({
+      const model = getGenAI().getGenerativeModel({
         model: modelName,
         generationConfig: {
           responseMimeType: 'application/json',
@@ -189,7 +191,7 @@ Ensure every single candidate index from 0 to ${candidates.length - 1} has an en
     for (let attempt = 0; attempt < retries; attempt++) {
       const modelName = models[attempt % models.length];
       try {
-        const model = genAI.getGenerativeModel({
+        const model = getGenAI().getGenerativeModel({
           model: modelName,
           generationConfig: {
             responseMimeType: 'application/json',
