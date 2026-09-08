@@ -6,6 +6,19 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
+export interface PolicyCandidate {
+  id: string | number;
+  score?: number;
+  payload?: {
+    content?: string;
+    clause_id?: string;
+    title?: string;
+    category?: string;
+    [key: string]: any;
+  } | null;
+  [key: string]: any;
+}
+
 const receiptSchema = {
   type: SchemaType.OBJECT,
   properties: {
@@ -131,4 +144,94 @@ export async function embedText(text: string, retries = 3): Promise<number[]> {
   }
 
   throw new Error('Exhausted embedding retries');
+}
+
+/**
+ * Two-Stage Cross-Encoder Reranker
+ * Scores and reorders retrieved candidate chunks against queryText using joint cross-attention.
+ * Safely falls back to top dense candidates if an error or timeout occurs.
+ */
+export async function rerankCandidates(
+  query: string,
+  candidates: PolicyCandidate[],
+  topK: number = 3
+): Promise<PolicyCandidate[]> {
+  if (!candidates || candidates.length === 0) return [];
+  if (candidates.length <= topK) return candidates;
+
+  const models = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-3-flash-preview'];
+
+  try {
+    const candidateListText = candidates
+      .map((c, idx) => {
+        const textSnippet = (c.payload?.content || '').trim().replace(/\s+/g, ' ');
+        return `[Candidate ${idx}]: ${textSnippet}`;
+      })
+      .join('\n\n');
+
+    const rerankPrompt = `You are a cross-encoder ranking model evaluating policy document retrieval.
+Analyze how relevant each candidate policy clause is to auditing the specific expense claim query below.
+Score each candidate on a continuous relevance scale from 0.000 to 1.000 (1.000 = directly governs this expense claim, 0.000 = completely irrelevant).
+
+Query: "${query}"
+
+Candidates:
+${candidateListText}
+
+Return ONLY a raw JSON object with a single key "scores" containing an array of objects:
+{"scores": [{"index": 0, "relevance_score": 0.95}, {"index": 1, "relevance_score": 0.12}, ...]}
+Do not include any other keys or markdown fences.`;
+
+    let parsedScores: { index: number; relevance_score: number }[] | null = null;
+
+    for (const modelName of models) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: {
+            responseMimeType: 'application/json',
+            temperature: 0.0,
+          },
+        });
+
+        const result = await model.generateContent(rerankPrompt);
+        const text = result.response.text();
+        const json = JSON.parse(text);
+        if (Array.isArray(json.scores) && json.scores.length > 0) {
+          parsedScores = json.scores;
+          break;
+        }
+      } catch (err: any) {
+        console.warn(`[Reranker Attempt failed on ${modelName}]: ${err.message?.substring(0, 80)}`);
+      }
+    }
+
+    if (!parsedScores) {
+      throw new Error('Unable to obtain candidate scores from reranker models.');
+    }
+
+    const scoredCandidates = candidates.map((candidate, idx) => {
+      const match = parsedScores!.find(s => s.index === idx);
+      const rerankScore = match && typeof match.relevance_score === 'number' ? match.relevance_score : 0.0;
+      return {
+        ...candidate,
+        rerank_score: rerankScore,
+      };
+    });
+
+    // Sort descending by rerank relevance score, tie-breaking by original dense vector score
+    scoredCandidates.sort((a, b) => {
+      const diff = (b.rerank_score ?? 0) - (a.rerank_score ?? 0);
+      if (Math.abs(diff) > 0.001) return diff;
+      return (b.score ?? 0) - (a.score ?? 0);
+    });
+
+    console.log(`[Two-Stage Retrieval] Reranked ${candidates.length} candidates. Top-${topK} selected.`);
+    return scoredCandidates.slice(0, topK);
+  } catch (error: any) {
+    console.warn(
+      `[Two-Stage Retrieval Warning] Cross-encoder reranking failed: ${error.message || error}. Falling back to top-${topK} initial dense vector results.`
+    );
+    return candidates.slice(0, topK);
+  }
 }

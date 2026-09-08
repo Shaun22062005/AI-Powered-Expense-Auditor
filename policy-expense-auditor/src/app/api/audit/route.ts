@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { extractReceiptData, runAudit, embedText } from '@/lib/ai/gemini';
+import { extractReceiptData, runAudit, embedText, rerankCandidates, PolicyCandidate } from '@/lib/ai/gemini';
 import { qdrant } from '@/lib/qdrant/client';
 import { createServerClient } from '@/lib/db/supabase';
 import { sendAuditNotification } from '@/lib/email/resend';
@@ -66,14 +66,33 @@ export async function POST(req: NextRequest) {
     const queryText = queryParts.join(' | ');
 
     const embedding = await embedText(queryText);
-    const searchResult = await qdrant.search('policies', {
-      vector: embedding,
-      limit: 3,
-    });
-    console.log('Qdrant Search Query:', queryText);
-    console.log('Qdrant Search Results:', JSON.stringify(searchResult, null, 2));
 
-    const policyContext = searchResult.map(r => r.payload?.content).filter(Boolean).join('\n');
+    // Stage 1: Candidate Retrieval from Qdrant (broad pool: top 10 candidates)
+    const initialCandidates = await qdrant.search('policies', {
+      vector: embedding,
+      limit: 10,
+    });
+    console.log(`[Two-Stage Retrieval] Qdrant retrieved ${initialCandidates.length} candidate chunks for query: "${queryText}"`);
+
+    // Stage 2: Cross-Encoder Reranking (scores candidates against queryText; falls back safely to dense top-3 if needed)
+    const topChunks = await rerankCandidates(queryText, initialCandidates as PolicyCandidate[], 3);
+    console.log(
+      '[Two-Stage Retrieval] Selected Top-3 Chunks:',
+      JSON.stringify(
+        topChunks.map((c) => ({
+          id: c.id,
+          clause_id: c.payload?.clause_id,
+          title: c.payload?.title,
+          dense_score: c.score,
+          rerank_score: c.rerank_score,
+        })),
+        null,
+        2
+      )
+    );
+
+    // Build policy context strictly from the top-3 reranked chunks
+    const policyContext = topChunks.map(r => r.payload?.content).filter(Boolean).join('\n\n---\n\n');
     const combinedData = {
       receipt: extractedData,
       user_claim: manualData

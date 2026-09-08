@@ -84,7 +84,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" name="password" className="block text-sm font-medium text-gray-400 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-400 mb-2">
                 Password
               </label>
               <input

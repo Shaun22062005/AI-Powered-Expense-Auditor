@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+// @ts-ignore
 import pdf from 'pdf-parse';
 import { qdrant, ensureCollection } from '@/lib/qdrant/client';
 import { embedText } from '@/lib/ai/gemini';
