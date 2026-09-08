@@ -149,7 +149,7 @@ export async function embedText(text: string, retries = 3): Promise<number[]> {
 /**
  * Two-Stage Cross-Encoder Reranker
  * Scores and reorders retrieved candidate chunks against queryText using joint cross-attention.
- * Safely falls back to top dense candidates if an error or timeout occurs.
+ * Safely falls back to top dense candidates with an explicit warning if an error or timeout occurs.
  */
 export async function rerankCandidates(
   query: string,
@@ -159,7 +159,9 @@ export async function rerankCandidates(
   if (!candidates || candidates.length === 0) return [];
   if (candidates.length <= topK) return candidates;
 
-  const models = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-3-flash-preview'];
+  // Prioritize high-throughput, low-latency models for reranking
+  const models = ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-3-flash-preview'];
+  const retries = 3;
 
   try {
     const candidateListText = candidates
@@ -178,13 +180,14 @@ Query: "${query}"
 Candidates:
 ${candidateListText}
 
-Return ONLY a raw JSON object with a single key "scores" containing an array of objects:
+Return ONLY a raw JSON object with a single key "scores" containing an array of objects for all candidates from index 0 to ${candidates.length - 1}:
 {"scores": [{"index": 0, "relevance_score": 0.95}, {"index": 1, "relevance_score": 0.12}, ...]}
-Do not include any other keys or markdown fences.`;
+Ensure every single candidate index from 0 to ${candidates.length - 1} has an entry with a valid numerical relevance_score between 0.0 and 1.0 without duplicates. Do not include any other keys or markdown fences.`;
 
-    let parsedScores: { index: number; relevance_score: number }[] | null = null;
+    let scoreMap: Map<number, number> | null = null;
 
-    for (const modelName of models) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      const modelName = models[attempt % models.length];
       try {
         const model = genAI.getGenerativeModel({
           model: modelName,
@@ -197,27 +200,56 @@ Do not include any other keys or markdown fences.`;
         const result = await model.generateContent(rerankPrompt);
         const text = result.response.text();
         const json = JSON.parse(text);
-        if (Array.isArray(json.scores) && json.scores.length > 0) {
-          parsedScores = json.scores;
-          break;
+
+        // 1. Verify Array.isArray(parsedScores)
+        if (!Array.isArray(json?.scores)) {
+          throw new Error('Response missing "scores" array');
         }
+
+        const currentMap = new Map<number, number>();
+        for (const item of json.scores) {
+          if (
+            typeof item?.index !== 'number' ||
+            typeof item?.relevance_score !== 'number' ||
+            isNaN(item.relevance_score) ||
+            item.relevance_score < 0.0 ||
+            item.relevance_score > 1.0
+          ) {
+            throw new Error(`Invalid score entry at index ${item?.index}: ${item?.relevance_score}`);
+          }
+          if (currentMap.has(item.index)) {
+            throw new Error(`Duplicate score entry for candidate index ${item.index}`);
+          }
+          currentMap.set(item.index, item.relevance_score);
+        }
+
+        // 2. Verify all candidate indices from 0 to candidates.length - 1 are present
+        for (let i = 0; i < candidates.length; i++) {
+          if (!currentMap.has(i)) {
+            throw new Error(`Missing score entry for candidate index ${i}`);
+          }
+        }
+
+        scoreMap = currentMap;
+        break; // Successfully obtained and validated scores
       } catch (err: any) {
-        console.warn(`[Reranker Attempt failed on ${modelName}]: ${err.message?.substring(0, 80)}`);
+        console.warn(
+          `[Reranker Attempt ${attempt + 1}/${retries} failed on ${modelName}]: ${err.message?.substring(0, 100)}`
+        );
+        if (attempt < retries - 1) {
+          await delay(1500 * (attempt + 1));
+        }
       }
     }
 
-    if (!parsedScores) {
-      throw new Error('Unable to obtain candidate scores from reranker models.');
+    if (!scoreMap) {
+      throw new Error('All reranker retry attempts failed to return valid candidate scores.');
     }
 
-    const scoredCandidates = candidates.map((candidate, idx) => {
-      const match = parsedScores!.find(s => s.index === idx);
-      const rerankScore = match && typeof match.relevance_score === 'number' ? match.relevance_score : 0.0;
-      return {
-        ...candidate,
-        rerank_score: rerankScore,
-      };
-    });
+    const scoredCandidates = candidates.map((candidate, idx) => ({
+      ...candidate,
+      rerank_score: scoreMap!.get(idx) ?? 0.0,
+    }));
 
     // Sort descending by rerank relevance score, tie-breaking by original dense vector score
     scoredCandidates.sort((a, b) => {
@@ -230,7 +262,7 @@ Do not include any other keys or markdown fences.`;
     return scoredCandidates.slice(0, topK);
   } catch (error: any) {
     console.warn(
-      `[Two-Stage Retrieval Warning] Cross-encoder reranking failed: ${error.message || error}. Falling back to top-${topK} initial dense vector results.`
+      `[Two-Stage Retrieval Warning] Cross-encoder reranker failed (${candidates.length} candidates, query: "${query.substring(0, 50)}..."): ${error.message}. Defaulting to top-${topK} vector search.`
     );
     return candidates.slice(0, topK);
   }
