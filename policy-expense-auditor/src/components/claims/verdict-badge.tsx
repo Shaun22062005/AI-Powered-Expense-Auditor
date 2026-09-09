@@ -10,11 +10,11 @@ interface VerdictBadgeProps {
 
 export default function VerdictBadge({ status, className }: VerdictBadgeProps) {
   const styles: Record<VerdictStatus, string> = {
-    approved: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    flagged: 'bg-amber-100 text-amber-700 border-amber-200',
-    rejected: 'bg-rose-100 text-rose-700 border-rose-200',
-    pending: 'bg-slate-100 text-slate-700 border-slate-200',
-    auditing: 'bg-indigo-100 text-indigo-700 border-indigo-200 animate-pulse',
+    approved: 'bg-emerald-950/60 text-emerald-400 border-emerald-500/30 shadow-sm shadow-emerald-900/20',
+    flagged: 'bg-amber-950/60 text-amber-300 border-amber-500/30 shadow-sm shadow-amber-900/20',
+    rejected: 'bg-rose-950/60 text-rose-400 border-rose-500/30 shadow-sm shadow-rose-900/20',
+    pending: 'bg-slate-900 text-slate-300 border-slate-700/60',
+    auditing: 'bg-blue-950/60 text-blue-400 border-blue-500/30 animate-pulse',
   };
 
   const labels: Record<VerdictStatus, string> = {
@@ -27,7 +27,7 @@ export default function VerdictBadge({ status, className }: VerdictBadgeProps) {
 
   return (
     <span className={cn(
-      'px-2.5 py-0.5 rounded-full text-xs font-bold border uppercase tracking-wider',
+      'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border uppercase tracking-wider',
       styles[status],
       className
     )}>
