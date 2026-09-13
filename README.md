@@ -1,244 +1,205 @@
-# Corporate Policy based Expense Auditor (Auditor.ai)
+# Auditor AI — Autonomous Corporate Expense Compliance Engine
 
-> An AI-native corporate expense audit system that automatically verifies employee receipt submissions against company Travel & Expense (T&E) policy documents using Multimodal Vision AI and Vector RAG search.
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-Cloud_Vector_DB-red?style=flat)](https://qdrant.tech/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-Vision_%26_Cross--Encoder-orange?style=flat&logo=google)](https://ai.google.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL_%26_Auth-emerald?style=flat&logo=supabase)](https://supabase.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
-
-## 🎯 What It Is & Primary Use Case
-
-The **Policy-First Expense Auditor** is an end-to-end automated platform that processes corporate expense claims instantly. 
-
-When an employee submits a receipt and business justification:
-1. **Multimodal OCR**: Google Gemini 1.5 Flash extracts receipt metadata (merchant, total amount, currency, date, readability score) directly from receipt images.
-2. **Policy RAG Search**: The claim category and stated business purpose are embedded via `text-embedding-004` and cross-referenced against vectorized company policy clauses stored in **Qdrant**.
-3. **Structured AI Audit Verdict**: Gemini evaluates the claim against the retrieved policy clauses and generates a strict, structured verdict (`Approved`, `Flagged`, or `Rejected`) containing:
-   - **Verdict Status**: `Approved` | `Flagged` | `Rejected`
-   - **Reason**: Exactly one concise sentence explaining the decision.
-   - **Policy Excerpt**: The exact matching clause from the company policy.
-   - **Confidence Score**: A 0.0 to 1.0 risk score.
-4. **Manager Overrides**: Flagged or rejected claims can be reviewed by managers with human-in-the-loop overrides and recorded audit trails.
+**Auditor AI** is an AI-native corporate expense auditing and compliance platform. It eliminates manual expense reviews and catches subtle corporate policy violations by combining multimodal OCR, boundary-aware policy indexing, and a **Two-Stage RAG Pipeline (Dense Vector Search + Listwise Cross-Encoder Reranking)** with human-in-the-loop audit controls.
 
 ---
 
-## 🔄 What It Replaces
+## 1. Key Capabilities
 
-Traditional corporate expense auditing is flawed, slow, and expensive. This platform replaces:
-
-* **Manual Finance Team Review**: Eliminates line-by-line manual receipt checking by finance teams, reducing review cycles from **weeks to seconds**.
-* **Static Spreadsheets & Hardcoded Rules**: Replaces rigid, static spending limit spreadsheets with contextual policy checking (e.g., checking if a meal receipt complies with client entertainment guidelines).
-* **High Fraud & Human Error Rates**: Eliminates human oversight fatigue, missing receipt details, or inconsistent policy enforcement across departments.
-* **Delayed Employee Reimbursements**: Prevents cash-flow friction for employees by providing immediate feedback on claim eligibility upon upload.
-* **Disconnected Email Threads**: Replaces fragmented back-and-forth emails between finance, managers, and employees with centralized audit logs and Resend email alerts.
-
----
-
-## 🛠️ Tech Stack
-
-* **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, shadcn/ui, Lucide Icons
-* **Backend**: Next.js API Routes (TypeScript)
-* **Database & File Storage**: Supabase (PostgreSQL + Supabase Storage for receipt images & PDFs)
-* **AI & Vision Engine**: `@google/generative-ai` (Gemini 1.5 Flash for multimodal OCR & structured JSON audit reasoning)
-* **Vector DB (RAG)**: Qdrant (`@qdrant/js-client-rest`) with Google `text-embedding-004` (768-dim embeddings)
-* **Transactional Email**: Resend
-* **Validation**: Zod schema validation for strict API boundaries
+- **Multimodal Receipt Parsing**: Zero-shot extraction of merchant name, transaction date, category, total amounts, currencies, and line items directly from images and PDFs using Gemini Vision.
+- **Production-Aligned Query Synthesis**: Formulates structured, pipe-delimited search queries (`Category | Merchant | Business Purpose | Amount Currency`) matching real-world transaction patterns.
+- **Two-Stage RAG Pipeline**:
+  1. *Stage 1 (Dense Retrieval)*: Top-10 candidate clause retrieval from Qdrant Cloud via `text-embedding-004`.
+  2. *Stage 2 (Cross-Encoder Reranking)*: Listwise reranking using high-throughput Gemini Flash scoring with exponential backoff to select the top 3 governing policy chunks.
+- **Calibrated Policy Decisioning**: Eliminates compliance leakage (0.00% False Approvals) and prevents false-rejection collapse by routing ambiguous or surge items to `flagged` human-in-the-loop review instead of hard rejection.
+- **Executive Command Center**: Built according to strict `frontend-architect-uiux` design standards, featuring 60-30-10 surface elevation, full 4-state lifecycle handling (loading skeletons, actionable empty states, error boundaries), and right-aligned tabular currency displays.
+- **Automated Lifecycle Notifications**: Dispatches branded transactional compliance audit status emails via Resend.
 
 ---
 
-## 🗄️ Database Schema
+## 2. Architecture & Pipeline Flow
 
-The database relies on four primary PostgreSQL tables in Supabase:
+```mermaid
+flowchart TD
+    subgraph Client ["Client & Experience Layer"]
+        A["User Uploads Receipt<br>(PNG, JPEG, PDF)"] --> B["Submit Claim Form<br>(/submit)"]
+        B --> C["Executive Command Center<br>(/dashboard)"]
+    end
 
-* `employees`: Stores user profiles, departments, roles (`employee`, `manager`, `admin`), and manager relationships.
-* `claims`: Stores claim metadata, amounts, currency, business purpose, receipt storage paths, and current status (`pending`, `auditing`, `approved`, `flagged`, `rejected`). Auto-updates `updated_at` via database trigger.
-* `audit_logs`: Stores the AI verdict, confidence score, 1-sentence reason, policy clause excerpt, and raw AI response.
-* `policy_overrides`: Records human manager overrides with justification for audit compliance.
+    subgraph OCR ["Stage 1: Multimodal OCR"]
+        B --> D["POST /api/audit"]
+        D --> E["Gemini Vision OCR<br>(Structured Line-Item & Total Extraction)"]
+    end
+
+    subgraph TwoStageRAG ["Two-Stage Retrieval & Reranking"]
+        E --> F["Structured Query Synthesis<br>${category} | at ${merchant} | Purpose: ${purpose} | Amount: ${amt}"]
+        F --> G["Dense Vector Embedding<br>(gemini-embedding-001)"]
+        G --> H["Qdrant Cloud Search<br>(Top-10 Boundary-Aware Clauses)"]
+        H --> I["Gemini Listwise Cross-Encoder<br>(Scoring + Retry Backoff)"]
+        I --> J["Top-3 Governing Policy Chunks<br>(Recall@3: 100.0% | MRR: 1.0000)"]
+    end
+
+    subgraph AuditEngine ["Stage 4: Compliance Auditing & Storage"]
+        J --> K["Calibrated Domain Compliance Prompt<br>(Per-diems, Caps, Non-waivable Exclusions)"]
+        K --> L["Audit Verdict Output<br>(Approved / Flagged / Rejected + Citations)"]
+        L --> M["Supabase DB<br>(claims & audit_logs)"]
+        L --> N["Resend Email Dispatch<br>(Audit Result to Employee & Manager)"]
+    end
+```
 
 ---
 
-## 🚀 How to Setup & Use
+## 3. Verified Benchmark Results
+
+Benchmarked against **40 decoupled ground-truth expense claims** (9 Easy, 18 Medium, 13 Hard) tested against 24 corporate Travel & Expense policy clauses indexed in Qdrant:
+
+| Metric | Single-Stage Baseline (500-char) | Production Two-Stage RAG Pipeline | Impact / Delta |
+| :--- | :---: | :---: | :---: |
+| **Retrieval Recall@3** | 93.75% | **100.00%** | **+6.25%** (Zero missed clauses) |
+| **Mean Reciprocal Rank (MRR)** | 0.9375 | **1.0000** | Governing clause ranked #1 every time |
+| **Reranker Fallback Rate** | N/A | **0.00% (0 / 40)** | 100% successful cross-encoder passes |
+| **End-to-End Decision Accuracy** | 72.50% | **85.00%** | **+12.50%** across test suite |
+| **Flagged Claim Recall (HITL)** | 25.00% (class collapse) | **91.67% (11 / 12)** | Rescued borderline claims for manager review |
+| **Prohibited Claim Interception** | 86.67% | **93.33% (14 / 15)** | High capture of policy violations |
+| **Compliance Leakage (False Approvals)** | 0.00% | **0.00% (0 / 15)** | **Zero** policy violations erroneously approved |
+
+### Benchmark Confusion Matrix ($n = 40$ Claims)
+```
+                     PREDICTED
+                 Approved  Flagged  Rejected
+  ACTUAL Approved       9        3         1
+         Flagged        0       11         1
+         Rejected       0        1        14
+```
+
+---
+
+## 4. Multi-Stage Unit Economics & Cost Profile
+
+The complete 4-stage processing lifecycle costs **~$0.36 per 1,000 audits** ($0.00036 per claim):
+
+| Stage | Infrastructure / Model | Tokens per 1k Claims | Unit Rate | Cost / 1k Audits |
+| :--- | :--- | :--- | :--- | :---: |
+| **1. Multimodal OCR** | `gemini-2.0-flash` | ~378k in / ~80k out | $0.10/M in, $0.40/M out | **$0.0698** |
+| **2. Dense Embedding** | `text-embedding-004` + Qdrant | ~68k tokens | $0.025/M tokens | **$0.0017** |
+| **3. Cross-Encoder Reranker** | `gemini-3.5-flash-lite` | ~1.62M in / ~40k out | $0.075/M in, $0.30/M out | **$0.1376** |
+| **4. Compliance Audit Engine** | `gemini-2.0-flash` | ~1.12M in / ~88k out | $0.10/M in, $0.40/M out | **$0.1472** |
+| **Total End-to-End Cost** | — | — | — | **$0.3563 (~$0.36)** |
+
+> **Enterprise Scale**: Processing **100,000 claims/month** costs approximately **$35.63/month** in total AI inference and storage infrastructure.
+
+---
+
+## 5. Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server Components & Route Handlers)
+- **Language & Runtime**: [TypeScript 5](https://www.typescriptlang.org/), Node.js
+- **Vector Database**: [Qdrant Cloud](https://qdrant.tech/) (Cosine similarity dense index)
+- **Primary Database & Auth**: [Supabase](https://supabase.com/) (PostgreSQL with Row-Level Security, Storage, SSR Auth)
+- **AI Models & Inference**:
+  - `gemini-2.0-flash` (Multimodal Receipt OCR & Compliance Decision Engine)
+  - `gemini-3.5-flash-lite` (Listwise Cross-Encoder Reranking)
+  - `gemini-embedding-001` / `text-embedding-004` (Dense Semantic Embeddings)
+- **Form & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
+- **Styling & UI**: [Tailwind CSS](https://tailwindcss.com/), [Lucide React](https://lucide.dev/) (designed to `frontend-architect-uiux` standard)
+- **Email Delivery**: [Resend](https://resend.com/)
+
+---
+
+## 6. Getting Started
 
 ### Prerequisites
-* **Node.js**: v18.0.0 or higher
-* **Supabase Account**: Project URL & Anon Key + Storage bucket named `receipts`
-* **Qdrant Vector DB**: Cluster URL & API Key
-* **Google Gemini API Key**: API key with access to `gemini-1.5-flash` and `text-embedding-004`
-* **Resend API Key**: For sending email notifications
+- Node.js 18.17+ or Node.js 20+
+- A Google AI Studio API key (Gemini)
+- A Qdrant Cloud cluster and API key
+- A Supabase project (URL and Anon key)
+- A Resend API key (optional for email notifications)
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Shaun22062005/AI-Powered-Expense-Auditor.git
+   cd policy-expense-auditor
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**:
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Supabase Configuration
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+
+   # Qdrant Vector Database
+   QDRANT_URL=https://your-cluster.qdrant.io
+   QDRANT_API_KEY=your-qdrant-api-key
+
+   # Google Gemini API
+   GEMINI_API_KEY=your-gemini-api-key
+
+   # Resend Email API
+   RESEND_API_KEY=your-resend-api-key
+   ```
+
+4. **Database & Vector Collection Setup**:
+   - Ensure your Supabase instance has the `claims` and `audit_logs` tables and `receipts` storage bucket initialized.
+   - Ensure the Qdrant `policies` collection is seeded with your company's policy clauses (see `eval/policies_eval_boundary.json` for structure).
+
+5. **Start the Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Navigate to [http://localhost:3000](http://localhost:3000) to access the application.
 
 ---
 
-### Step 1: Clone the Repository & Install Dependencies
+## 7. Project Structure
 
-```bash
-git clone https://github.com/Shaun22062005/cymonic_project.git
-cd cymonic_project/policy-expense-auditor
-npm install
+```text
+policy-expense-auditor/
+├── .agents/
+│   └── skills/
+│       └── frontend-architect-uiux/  # UI/UX engineering standards & runbooks
+├── eval/
+│   ├── REPORT.md                     # Comprehensive RAG benchmark & unit economics report
+│   └── policies_eval_boundary.json   # 24 boundary-aware corporate policy clauses
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── audit/route.ts        # Production 2-stage retrieval & audit pipeline
+│   │   │   ├── claims/route.ts       # Claim management endpoints
+│   │   │   └── policy/               # Policy ingestion & search endpoints
+│   │   ├── dashboard/page.tsx        # Compliance Command Center (4-state lifecycle)
+│   │   ├── submit/page.tsx           # Expense upload & live audit submission view
+│   │   └── page.tsx                  # Authentication & login entry point
+│   ├── components/
+│   │   ├── claims/                   # Claim cards, verdict badges, and receipt viewers
+│   │   ├── forms/                    # Submit claim form with Zod schema validation
+│   │   └── layout/                   # Sidebar, headers, and shell components
+│   └── lib/
+│       ├── ai/
+│       │   ├── gemini.ts             # OCR, embeddings, cross-encoder reranking & audit calls
+│       │   └── prompts.ts            # Calibrated domain-level compliance prompts
+│       ├── db/                       # Supabase client helpers
+│       └── qdrant/                   # Qdrant vector DB client
+├── middleware.ts                     # Auth session middleware
+└── package.json
 ```
 
 ---
 
-### Step 2: Configure Environment Variables
+## 8. License
 
-Create a `.env.local` file in `policy-expense-auditor/` with the following variables:
-
-```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-
-# Qdrant Vector DB
-QDRANT_URL=https://your-qdrant-cluster-url.qdrant.tech
-QDRANT_API_KEY=your-qdrant-api-key
-
-# Google Gemini AI Key
-GEMINI_API_KEY=your-google-gemini-api-key
-
-# Resend Email Key
-RESEND_API_KEY=re_your_resend_key
-```
-
----
-
-### Step 3: Run Database Migrations
-
-Execute the SQL script in your Supabase SQL Editor to create the enum, tables, indexes, and auto-update triggers:
-
-```sql
--- Trigger function for auto-updating updated_at columns
-CREATE OR REPLACE FUNCTION set_current_timestamp_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Employees / Users
-CREATE TABLE employees (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(255) UNIQUE NOT NULL,
-    full_name VARCHAR(255) NOT NULL,
-    department VARCHAR(100),
-    role VARCHAR(50) DEFAULT 'employee',
-    manager_id UUID REFERENCES employees(id),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TRIGGER set_employees_updated_at
-BEFORE UPDATE ON employees
-FOR EACH ROW
-EXECUTE FUNCTION set_current_timestamp_updated_at();
-
--- Expense Claims
-CREATE TYPE claim_status AS ENUM ('pending', 'auditing', 'approved', 'flagged', 'rejected');
-
-CREATE TABLE claims (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    employee_id UUID REFERENCES employees(id) ON DELETE CASCADE NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    currency VARCHAR(3) DEFAULT 'USD',
-    merchant VARCHAR(255) NOT NULL,
-    expense_date DATE NOT NULL,
-    business_purpose TEXT NOT NULL,
-    category VARCHAR(100),
-    receipt_storage_path TEXT NOT NULL,
-    status claim_status DEFAULT 'pending',
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TRIGGER set_claims_updated_at
-BEFORE UPDATE ON claims
-FOR EACH ROW
-EXECUTE FUNCTION set_current_timestamp_updated_at();
-
--- AI Audit Logs
-CREATE TABLE audit_logs (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    claim_id UUID REFERENCES claims(id) ON DELETE CASCADE NOT NULL,
-    verdict claim_status NOT NULL,
-    confidence_score FLOAT CHECK (confidence_score >= 0 AND confidence_score <= 1),
-    reason TEXT NOT NULL,
-    policy_excerpt TEXT NOT NULL,
-    raw_ai_response JSONB,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Manager Policy Overrides
-CREATE TABLE policy_overrides (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    claim_id UUID REFERENCES claims(id) ON DELETE CASCADE NOT NULL,
-    manager_id UUID REFERENCES employees(id) NOT NULL,
-    new_status claim_status NOT NULL,
-    justification TEXT NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Performance Indexes
-CREATE INDEX idx_claims_employee_id ON claims(employee_id);
-CREATE INDEX idx_claims_status ON claims(status);
-CREATE INDEX idx_audit_logs_claim_id ON audit_logs(claim_id);
-```
-
-Ensure a storage bucket named `receipts` is set up in Supabase Storage with public/authenticated read access as appropriate.
-
----
-
-### Step 4: Start the Development Server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-### Step 5: How to Submit a Claim & Perform Audits
-
-#### 1. Uploading & Submitting a Claim (API)
-Send a `POST` request to `/api/audit` using `multipart/form-data`:
-
-```bash
-curl -X POST http://localhost:3000/api/audit \
-  -F "receipt=@/path/to/receipt.jpeg" \
-  -F "employee_id=YOUR_EMPLOYEE_UUID" \
-  -F "merchant=Uber" \
-  -F "amount=45.50" \
-  -F "currency=USD" \
-  -F "category=Travel" \
-  -F "expense_date=2026-03-28" \
-  -F "business_purpose=Taxi ride from airport to client meeting location"
-```
-
-#### 2. Response Payload Example
-```json
-{
-  "claim": {
-    "id": "c7a840e2-892b-4786-a212-68fb4f1a2384",
-    "employee_id": "YOUR_EMPLOYEE_UUID",
-    "amount": 45.5,
-    "currency": "USD",
-    "merchant": "Uber",
-    "expense_date": "2026-03-28",
-    "business_purpose": "Taxi ride from airport to client meeting location",
-    "category": "Travel",
-    "receipt_storage_path": "YOUR_EMPLOYEE_UUID-1711652400-receipt.jpeg",
-    "status": "approved",
-    "created_at": "2026-03-28T20:45:00.000Z",
-    "updated_at": "2026-03-28T20:45:01.000Z"
-  },
-  "audit": {
-    "id": "e4f51a2b-3c4d-5e6f-7a8b-9c0d1e2f3a4b",
-    "claim_id": "c7a840e2-892b-4786-a212-68fb4f1a2384",
-    "verdict": "approved",
-    "confidence_score": 0.95,
-    "reason": "Ground transportation for business travel under $50 is approved without prior manager pre-approval.",
-    "policy_excerpt": "Section 4.2 (Ground Transportation): Taxis, rideshares, and public transit under $50 per trip incurred during business travel are fully reimbursable.",
-    "created_at": "2026-03-28T20:45:01.000Z"
-  }
-}
-```
-
-#### 3. Viewing Claims & Audit Dashboard
-Send a `GET` request to `/api/claims` to view all submitted claims and their latest audit log, sorted by lowest confidence score (highest compliance risk first).
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
